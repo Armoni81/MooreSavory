@@ -1,24 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
+import LandingPage from './Components/LandingPage/landingPage';
+import ResponsiveAppBar from './Components/materialUI NAVbar/navBar';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          DRZ Commit
-        </a>
-      </header>
-    </div>
+    <><ResponsiveAppBar /><LandingPage /></>
   );
 }
 
