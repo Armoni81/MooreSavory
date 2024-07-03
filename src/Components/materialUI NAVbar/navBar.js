@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import saladLogo from '../../images/salad.png'
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -35,27 +36,33 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
+  const  styles= {
+    navBarSaladLogo :{
+      width:'33px', 
+      margin: '15px'
+    }
+  }
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <img style={styles.navBarSaladLogo} src={saladLogo}/>
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: 'pink',
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Moore Savory
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -111,7 +118,7 @@ function ResponsiveAppBar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Moore Savory
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
