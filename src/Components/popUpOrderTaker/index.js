@@ -16,10 +16,12 @@ export default function SimpleContainer({ selectedSalad,  checkOutModal, setChec
 
     const saladInfo = Array(saladChoices.find(salad => salad.title === selectedSalad))
 
-    const handleCheckBox = (event) =>  {
-        //onchange grab  the selected salad and update the defaulttoppings key witht he clicked value 
-        console.log(event.target.value)
-        console.log(saladInfo[0].defaultToppings, 'info')
+    const handleCheckBox = (event, topping) =>  {
+      //bug if i select cease salad and uncheck all and then click on next salad they will all also be unchecked as well
+        console.log(saladInfo, 'saladinfo')
+        console.log(saladChoices, 'saladChoices')
+        saladInfo[0].defaultToppings[topping] = event.target.checked
+    
     }
 
    
@@ -28,7 +30,7 @@ export default function SimpleContainer({ selectedSalad,  checkOutModal, setChec
     <div>
         {
             saladInfo.map((el, key) => {
-                {console.log(Object.keys(el.defaultToppings), 'here el ')}
+                // {console.log(Object.keys(el.defaultToppings), 'here el ')}
                 return (
                     <Modal
                     open={checkOutModal}
@@ -44,14 +46,17 @@ export default function SimpleContainer({ selectedSalad,  checkOutModal, setChec
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                       {el.description}
                     </Typography>
+                    <Typography sx={{ mt: 1, color: 'GrayText' }}>
+                        {el.saladDescription}
+                    </Typography>
                     <FormGroup>
                     {
                         
-                        Object.keys(el.defaultToppings).map((topping,key) => {
-                            console.log(el, 'hererherhe')
+                        Object.keys(el.defaultToppings).map((topping,id) => {
+                            console.log(id, 'hererherhe')
                           
                             return(
-                                <FormControlLabel control={<Checkbox disableRipple onChange={() => handleCheckBox(event) } defaultChecked={el.defaultToppings[topping]} value={topping}/> } label={topping} />
+                                <FormControlLabel control={<Checkbox disableRipple onChange={() => handleCheckBox(event, topping) } defaultChecked={el.defaultToppings[topping]} value={topping}/> } label={topping} />
 
                             )
                         })

@@ -12,12 +12,13 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import SimpleContainer from "../popUpOrderTaker";
+import Chip from '@mui/material/Chip';
 
 
 const OrderTaker = () => {
 
     const [ editOrder, setEditOrder]= useState(false)
-    const [ selectedSalad, setSelectedSalad ] = useState('Uncle Rucks')
+    const [ selectedSalad, setSelectedSalad ] = useState("SMOKED SALMON SALAD")
     const [ checkOutModal, setCheckOutModal ]= useState(false)
 
     const placeOrder = (id) => {
@@ -40,9 +41,10 @@ const OrderTaker = () => {
                         <>
                         
                         <div key={id}>
-                            <Card sx={{ maxWidth: 300, backgroundColor: 'aliceblue' }}>
-                                <CardHeader
-                                    title={el.title} />
+                            <Card sx={{ width: 300, height: 400, backgroundColor: 'aliceblue' }}>
+                                <Typography sx={{fontSize: '17px', margin:'15px'}}>
+                                    {el.title}
+                                </Typography>
                                 <CardMedia
                                     component="img"
                                     height="194"
