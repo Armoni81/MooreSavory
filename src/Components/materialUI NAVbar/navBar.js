@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import saladLogo from '../../images/salad.png'
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['Order'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -96,7 +96,7 @@ function ResponsiveAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center" href='/google'>{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -125,6 +125,7 @@ function ResponsiveAppBar() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
+                href='/order'
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
