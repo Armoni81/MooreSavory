@@ -9,12 +9,21 @@ export const saladChoices = [
         defaultToppings: {
           Shrimp: true,
           Tomatoes: true,
-          Onions: true,
+          Onions: false,
           Strawberries: true,
           "Cranberry/Pecan Mix": true,
           Feta: true
         },
-        price: 17.00
+        extraToppings: {
+            'Extra Onion + $1.00': false,
+            'Extra Shrimp + $3.50':  false,
+            'Extra Strawberries + $1.00': false,
+            'Extra Feta + $2.00': false,
+            'Extra Dressing + $1.00': false,
+            'Add Cheese + $1.50': false,
+
+        },
+        price: '$17.00'
       },
       {
         title: "CHICKEN CAESAR SALAD",
@@ -25,24 +34,18 @@ export const saladChoices = [
           Chicken: true,
           "Romaine Lettuce": true,
           "Shaved Parmesan": true,
-          Croutons: true
+          Croutons: false
         },
-        price: 13.75
-      },
-      {
-        title: "SALMON SALAD",
-        description: "Tomatoes, cucumbers, onions, cranberries, and a lemon wedge",
-        img: salad,  // Replace "salad" with the actual image URL or reference
-        saladDescription: "A fresh salad featuring tomatoes, cucumbers, onions, cranberries, and a zesty lemon wedge, topped with succulent salmon.",
-        defaultToppings: {
-          Salmon: true,
-          Tomatoes: true,
-          Cucumbers: true,
-          Onions: true,
-          Cranberries: true,
-          "Lemon Wedge": true
+        extraToppings: {
+            'Extra Onion': false,
+            'Extra Shrimp':  false,
+            'Extra Strawberries': false,
+            'Extra Feta': false,
+            'Extra Dressing': false,
+            'Add Cheese': false,
+
         },
-        price: 17.00
+        price: '$13.75'
       },
       {
         title: "SMOKED SALMON SALAD",
@@ -53,11 +56,20 @@ export const saladChoices = [
           "Smoked Salmon": true,
           Tomatoes: true,
           Cucumbers: true,
-          Onions: true,
+          Onions: false,
           "Bell Pepper": true,
           Feta: true
         },
-        price: 20.00
+        extraToppings: {
+            'Extra Onion': false,
+            'Extra Shrimp':  false,
+            'Extra Strawberries': false,
+            'Extra Feta': false,
+            'Extra Dressing': false,
+            'Add Cheese': false,
+
+        },
+        price: '$20.00'
       },
       {
         title: "SALMON CAESAR",
@@ -70,7 +82,16 @@ export const saladChoices = [
           "Shaved Parmesan": true,
           Croutons: true
         },
-        price: 17.00
+        extraToppings: {
+            'Extra Onion': false,
+            'Extra Shrimp':  false,
+            'Extra Strawberries': false,
+            'Extra Feta': false,
+            'Extra Dressing': false,
+            'Add Cheese': false,
+
+        },
+        price: '$17.00'
       },
       {
         title: "CHARLIES' STRAWBERRY CHICKEN",
@@ -84,7 +105,16 @@ export const saladChoices = [
           "Cranberry/Pecan Mix": true,
           Strawberries: true
         },
-        price: 14.25
+        extraToppings: {
+            'Extra Onion': false,
+            'Extra Shrimp':  false,
+            'Extra Strawberries': false,
+            'Extra Feta': false,
+            'Extra Dressing': false,
+            'Add Cheese': false,
+
+        },
+        price: '$14.25'
       },
       {
         title: "O LOIS' CHEF",
@@ -100,7 +130,16 @@ export const saladChoices = [
           Cheese: true,
           "Bacon Bits": true
         },
-        price: 14.25
+        extraToppings: {
+            'Extra Onion': false,
+            'Extra Shrimp':  false,
+            'Extra Strawberries': false,
+            'Extra Feta': false,
+            'Extra Dressing': false,
+            'Add Cheese': false,
+
+        },
+        price: '$14.25'
       },
       {
         title: "OLA'S VEGGIE DELIGHT",
@@ -114,7 +153,16 @@ export const saladChoices = [
           "Banana Peppers": true,
           Pickles: true
         },
-        price: 13.25
+        extraToppings: {
+            'Extra Onion': false,
+            'Extra Shrimp':  false,
+            'Extra Strawberries': false,
+            'Extra Feta': false,
+            'Extra Dressing': false,
+            'Add Cheese': false,
+
+        },
+        price: '$13.25'
       },
       {
         title: "GREEK SALAD",
@@ -129,7 +177,16 @@ export const saladChoices = [
           "Banana Pepper": true,
           Feta: true
         },
-        price: 13.25
+        extraToppings: {
+            'Extra Onion': false,
+            'Extra Shrimp':  false,
+            'Extra Strawberries': false,
+            'Extra Feta': false,
+            'Extra Dressing': false,
+            'Add Cheese': false,
+
+        },
+        price: '$13.25'
       },
       {
         title: "SHRIMP SALAD",
@@ -144,7 +201,16 @@ export const saladChoices = [
           Olives: true,
           Cheese: true
         },
-        price: 16.00
+        extraToppings: {
+            'Extra Onion': false,
+            'Extra Shrimp':  false,
+            'Extra Strawberries': false,
+            'Extra Feta': false,
+            'Extra Dressing': false,
+            'Add Cheese': false,
+
+        },
+        price: '$16.00'
       }
       
    

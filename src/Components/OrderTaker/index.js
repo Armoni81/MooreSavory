@@ -18,11 +18,12 @@ import Chip from '@mui/material/Chip';
 const OrderTaker = () => {
 
     const [ editOrder, setEditOrder]= useState(false)
-    const [ selectedSalad, setSelectedSalad ] = useState("SMOKED SALMON SALAD")
+    const [ selectedSalad, setSelectedSalad ] = useState("MOORE SAVORY SHRIMP SALAD")
     const [ checkOutModal, setCheckOutModal ]= useState(false)
+    const [ saladOptions, setSaladOptions ] = useState(saladChoices)
 
     const placeOrder = (id) => {
-        setSelectedSalad(saladChoices[id].title)
+        setSelectedSalad(saladOptions[id].title)
         setCheckOutModal(true)
 
      }
@@ -33,16 +34,16 @@ const OrderTaker = () => {
     return(
         <div>
            
-        <div style = {{display:'grid', gridTemplateColumns: 'auto auto auto', gap: '10px', margin: '20px'}}>
+        <div style = {{display:'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr)', gap: '10px', margin: '40px'}}>
             {
-                  saladChoices.map((el, id) => {
+                  saladOptions.map((el, id) => {
                     
                     return (
                         <>
                         
                         <div key={id}>
                             <Card sx={{ width: 300, height: 400, backgroundColor: 'aliceblue' }}>
-                                <Typography sx={{fontSize: '17px', margin:'15px'}}>
+                                <Typography sx={{fontSize: '15px', margin:'15px'}}>
                                     {el.title}
                                 </Typography>
                                 <CardMedia
@@ -55,7 +56,10 @@ const OrderTaker = () => {
                                         {el.description}
                                     </Typography>
                                 </CardContent>
-                                <CardActions disableSpacing style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                <CardActions  style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                    <Typography>
+                                        {el.price}
+                                    </Typography>
                                     <Button variant="contained" onClick={() => placeOrder(id)} endIcon={<SendIcon />}>Get Started</Button>
                                 </CardActions>
                             </Card>
@@ -68,7 +72,7 @@ const OrderTaker = () => {
             
           
         </div>
-        <SimpleContainer selectedSalad={selectedSalad} checkOutModal={checkOutModal} setCheckOutModal={setCheckOutModal}/>
+        <SimpleContainer selectedSalad={selectedSalad} checkOutModal={checkOutModal} setCheckOutModal={setCheckOutModal} saladOptions={saladOptions} setSaladOptions={setSaladOptions}/>
         </div>
     )
 }
