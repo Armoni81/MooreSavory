@@ -15,7 +15,7 @@ import SimpleContainer from "../popUpOrderTaker";
 import Chip from '@mui/material/Chip';
 
 
-const OrderTaker = () => {
+const OrderTaker = ({ total, setTotal }) => {
 
     const [ editOrder, setEditOrder]= useState(false)
     const [ selectedSalad, setSelectedSalad ] = useState("MOORE SAVORY SHRIMP SALAD")
@@ -72,7 +72,7 @@ const OrderTaker = () => {
             
           
         </div>
-        <SimpleContainer selectedSalad={selectedSalad} checkOutModal={checkOutModal} setCheckOutModal={setCheckOutModal} saladOptions={saladOptions} setSaladOptions={setSaladOptions}/>
+        <SimpleContainer selectedSalad={selectedSalad} checkOutModal={checkOutModal} setCheckOutModal={setCheckOutModal} saladOptions={saladOptions} setSaladOptions={setSaladOptions} total={total} setTotal={setTotal}/>
         </div>
     )
 }

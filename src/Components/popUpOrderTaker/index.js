@@ -10,7 +10,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import { styleForModalPopUp } from '../../Constants/consts';
 
 
-export default function SimpleContainer({ selectedSalad,  checkOutModal, setCheckOutModal, saladOptions, setSaladOptions }) {
+export default function SimpleContainer({ selectedSalad,  checkOutModal, setCheckOutModal, saladOptions, setSaladOptions, setTotal, total }) {
+    
     
 
     const handleClose = () => setCheckOutModal(false);
@@ -101,6 +102,9 @@ console.log(saladOptions, 'here saldoptions')
                 }
                 </Box>
                    
+                 <Typography>
+                    {`Total:${total}`}
+                 </Typography>
                         
                     </FormGroup>
                  </Box>
