@@ -25,6 +25,7 @@ const OrderTaker = ({ total, setTotal }) => {
     const placeOrder = (id) => {
         setSelectedSalad(saladOptions[id].title)
         setCheckOutModal(true)
+        setTotal(saladOptions[id].price)
 
      }
      const customerEditOrder = () => {

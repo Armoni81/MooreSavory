@@ -18,44 +18,47 @@ export default function SimpleContainer({ selectedSalad,  checkOutModal, setChec
 
     const saladI = saladOptions.findIndex(salad => salad.title === selectedSalad)
     const saladInfo = Array(saladOptions.find(salad => salad.title === selectedSalad))
-// console.log(saladI, 'SALADD')
-    const handleCheckBox = (event, topping) =>  {
-      //bug if i select cease salad and uncheck all and then click on next salad they will all also be unchecked as well
-
-        // saladInfo[0].defaultToppings[topping] = event.target.checked
-
-
-        // set the changed checkbox in the Array of objects . FInd the index of the object that has changed along with the ingredient and set to either true or false 
+    const handleCheckBoxBaseIngredients = (event, topping) =>  {
+ 
         setSaladOptions(salad => {
-            // console.log(salad, 'rick')
+          
             const newSaladOptions = [...salad]
             const saladIndex = newSaladOptions.findIndex(salad => salad.title === selectedSalad)
-            // console.log(newSaladOptions, 'yeet')
+            const  selectedSaladDefaultToppingsArray = Object.keys(newSaladOptions[saladIndex].defaultToppings)
+            const updatedSalad = { ...newSaladOptions[saladIndex]}
 
-            if(saladIndex > -1){
-                // console.log(topping, 'here topping')
-                const updatedSalad = { ...newSaladOptions[saladIndex]}
-                const updatedToppings = {...updatedSalad.defaultToppings}
+            if(selectedSaladDefaultToppingsArray.includes(event.target.value)){
+                if(saladIndex > -1){
 
-                updatedToppings[topping] = event.target.checked
-                updatedSalad.defaultToppings = updatedToppings
+                    const updatedToppings = {...updatedSalad.defaultToppings}
+    
+                    updatedToppings[topping] = event.target.checked
+                    updatedSalad.defaultToppings = updatedToppings
+                    newSaladOptions[saladIndex] = updatedSalad
+                }
+                
+            }else{
+                console.log(topping, 'toppin')
+                const updatedExtraToppings = {...updatedSalad.extraToppings}
+                updatedExtraToppings[topping] = event.target.checked
+                updatedSalad.extraToppings = updatedExtraToppings
                 newSaladOptions[saladIndex] = updatedSalad
-              
+
+                console.log(updatedExtraToppings, 'need')
+                //write logic to setTotla to whatever is true under updatedExtraToppings
             }
-            console.log(newSaladOptions, 'final log')
+
             return newSaladOptions
-            
         })
     
     }
 
+
    
-console.log(saladOptions, 'here saldoptions')
   return (
     <div>
         {
             saladInfo.map((el, key) => {
-                // {console.log(Object.keys(el.defaultToppings), 'here el ')}
                 return (
                     <Modal
                     open={checkOutModal}
@@ -78,11 +81,10 @@ console.log(saladOptions, 'here saldoptions')
                     {
                         
                         Object.keys(el.defaultToppings).map((topping,id) => {
-                            {console.log(el, 'here is el')}
-                            console.log(el.defaultToppings[topping], 'hererherhe')
+                           
                             
                             return(
-                                <FormControlLabel key={id} control={<Checkbox disableRipple onChange={() => handleCheckBox(event, topping) } checked={el.defaultToppings[topping]} value={topping}/> } label={topping} />
+                                <FormControlLabel key={id} control={<Checkbox disableRipple onChange={() => handleCheckBoxBaseIngredients(event, topping) } checked={el.defaultToppings[topping]} value={topping}/> } label={topping} />
 
                             )
                         })
@@ -95,7 +97,7 @@ console.log(saladOptions, 'here saldoptions')
                         Object.keys(el.extraToppings).map((extraTopping, id) => {
                           return(
                         
-                            <FormControlLabel key ={id} control={<Checkbox disableRipple value='foobar' checked={el.extraToppings[extraTopping] } checked={el.extraToppings[extraTopping]}  value={extraTopping}  />} label={extraTopping} />
+                            <FormControlLabel key ={id} control={<Checkbox disableRipple checked={el.extraToppings[extraTopping]} onChange={() => handleCheckBoxBaseIngredients(event, extraTopping) }  value={extraTopping}  />} label={extraTopping} />
 
                         )   
                     })

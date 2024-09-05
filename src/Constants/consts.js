@@ -15,7 +15,7 @@ export const saladChoices = [
           Feta: true
         },
         extraToppings: {
-            'Extra Onion + $1.00': false,
+            'Extra Onion + $1.00': true,
             'Extra Shrimp + $3.50':  false,
             'Extra Strawberries + $1.00': false,
             'Extra Feta + $2.00': false,
