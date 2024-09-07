@@ -1,24 +1,26 @@
 import * as React from 'react';
-import { useState } from 'react';
 
+//Material UI 
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import FormGroup from '@mui/material/FormGroup';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import  { Button }  from '@mui/material';
+import SendIcon from '@mui/icons-material/Send';
+
+//Imported Consts
 import { styleForModalPopUp } from '../../Constants/consts';
 
 
 export default function SimpleContainer({ selectedSalad,  checkOutModal, setCheckOutModal, saladOptions, setSaladOptions, setTotal, total }) {
     
-    
+    const handleClose = () => setCheckOutModal(false); 
 
-    const handleClose = () => setCheckOutModal(false);
-
-    const saladI = saladOptions.findIndex(salad => salad.title === selectedSalad)
     const saladInfo = Array(saladOptions.find(salad => salad.title === selectedSalad))
-    const handleCheckBoxBaseIngredients = (event, topping) =>  {
+
+    const handleCheckBoxBaseIngredients = (event,topping) =>  {
  
         setSaladOptions(salad => {
           
@@ -38,23 +40,54 @@ export default function SimpleContainer({ selectedSalad,  checkOutModal, setChec
                 }
                 
             }else{
-                console.log(topping, 'toppin')
+
                 const updatedExtraToppings = {...updatedSalad.extraToppings}
-                updatedExtraToppings[topping] = event.target.checked
-                updatedSalad.extraToppings = updatedExtraToppings
-                newSaladOptions[saladIndex] = updatedSalad
-
-                console.log(updatedExtraToppings, 'need')
-                //write logic to setTotla to whatever is true under updatedExtraToppings
+                const updatedCheckedProp = {...updatedExtraToppings[topping]}
+           
+                updatedCheckedProp.checked = event.target.checked
+                updatedSalad.extraToppings[topping] = updatedCheckedProp
+                newSaladOptions[saladIndex].extraToppings[topping] = updatedCheckedProp
+         
+                calculateTotal(newSaladOptions,saladIndex,topping)
             }
-
+            
             return newSaladOptions
         })
     
     }
 
+    const calculateTotal = (newSaladOptions, saladIndex, topping) => {
 
-   
+        // if(newSaladOptions[saladIndex].extraToppings[topping].checked){
+        //     newSaladOptions[saladIndex].extraToppings[topping]
+        // }
+      
+       Object.values(newSaladOptions[saladIndex].extraToppings).map(el => {
+        // console.log(el.checked)
+                
+     
+                    setTotal(total =>{
+                        console.log(total,el.price,el.checked,'price')
+                        //bug if el.checked runs everyu check gets added twice on every new click 
+                        if(el.checked === true){
+                            total += el.price
+                            el.price = 0
+
+                        }else{
+                            console.log(el.price, 'should be 0')
+                            console.log( newSaladOptions[saladIndex].extraToppings[topping], 'word')
+                            el.price = saladOptions[saladIndex].extraToppings[topping].price
+                            ///stopped here kid
+                            total -= el.price
+                        }
+                       return total
+                    } )
+               
+       })
+    }
+
+
+
   return (
     <div>
         {
@@ -81,23 +114,20 @@ export default function SimpleContainer({ selectedSalad,  checkOutModal, setChec
                     {
                         
                         Object.keys(el.defaultToppings).map((topping,id) => {
-                           
-                            
                             return(
-                                <FormControlLabel key={id} control={<Checkbox disableRipple onChange={() => handleCheckBoxBaseIngredients(event, topping) } checked={el.defaultToppings[topping]} value={topping}/> } label={topping} />
-
+                                <FormControlLabel key={id} control={<Checkbox disableRipple onChange={(event) => handleCheckBoxBaseIngredients(event,topping) } checked={el.defaultToppings[topping]} value={topping}/> } label={topping} />
                             )
                         })
                     }
                     <Box sx={{ p: 2, bgcolor: '#bbfcfb' }}>
                      <Typography>
-                        EXTRAS----------
+                        EXTRAS
                     </Typography>
                     {
                         Object.keys(el.extraToppings).map((extraTopping, id) => {
                           return(
                         
-                            <FormControlLabel key ={id} control={<Checkbox disableRipple checked={el.extraToppings[extraTopping]} onChange={() => handleCheckBoxBaseIngredients(event, extraTopping) }  value={extraTopping}  />} label={extraTopping} />
+                            <FormControlLabel key={id} control={<Checkbox disableRipple checked={el.extraToppings[extraTopping].checked} onChange={(event) => handleCheckBoxBaseIngredients(event,extraTopping) }  value={extraTopping}  />} label={extraTopping} />
 
                         )   
                     })
@@ -109,6 +139,7 @@ export default function SimpleContainer({ selectedSalad,  checkOutModal, setChec
                  </Typography>
                         
                     </FormGroup>
+                    <Button variant="contained" endIcon={<SendIcon />}>Add To Cart</Button>
                  </Box>
                  </Modal>
                 )

@@ -7,23 +7,23 @@ export const saladChoices = [
         img: salad,  // Replace "salad" with the actual image URL or reference
         saladDescription: "A savory mix of shrimp, fresh tomatoes, onions, strawberries, and a cranberry/pecan mix, all topped with feta cheese.",
         defaultToppings: {
-          Shrimp: true,
-          Tomatoes: true,
-          Onions: false,
-          Strawberries: true,
-          "Cranberry/Pecan Mix": true,
-          Feta: true
+          'Shrimp': true,
+          'Tomatoes': true,
+          'Onions': false,
+          'Strawberries': true,
+          'Cranberry/Pecan Mix': true,
+          'Feta': true
         },
         extraToppings: {
-            'Extra Onion + $1.00': true,
-            'Extra Shrimp + $3.50':  false,
-            'Extra Strawberries + $1.00': false,
-            'Extra Feta + $2.00': false,
-            'Extra Dressing + $1.00': false,
-            'Add Cheese + $1.50': false,
+            'Extra Onion + $1.00': {checked: false, price: 1},
+            'Extra Shrimp + $3.50':  {checked: false, price: 3.50},
+            'Extra Strawberries + $1.00':{checked: false, price: 1},
+            'Extra Feta + $2.00': {checked: false, price: 2},
+            'Extra Dressing + $1.00': {checked: false, price: 1},
+            'Add Cheese + $1.50': {checked: false, price: 1.50},
 
         },
-        price: '$17.00'
+        price: 17.00
       },
       {
         title: "CHICKEN CAESAR SALAD",
@@ -31,10 +31,10 @@ export const saladChoices = [
         img: salad,  // Replace "salad" with the actual image URL or reference
         saladDescription: "A classic Caesar salad with fresh romaine lettuce, shaved parmesan, and crunchy croutons.",
         defaultToppings: {
-          Chicken: true,
-          "Romaine Lettuce": true,
-          "Shaved Parmesan": true,
-          Croutons: false
+          'Chicken': true,
+          'Romaine Lettuce': true,
+          'Shaved Parmesan': true,
+          'Croutons': false
         },
         extraToppings: {
             'Extra Onion': false,
@@ -48,17 +48,17 @@ export const saladChoices = [
         price: '$13.75'
       },
       {
-        title: "SMOKED SALMON SALAD",
-        description: "Tomatoes, cucumbers, onion, bell pepper, and feta cheese",
+        title: 'SMOKED SALMON SALAD',
+        description: 'Tomatoes, cucumbers, onion, bell pepper, and feta cheese',
         img: salad,  // Replace "salad" with the actual image URL or reference
-        saladDescription: "A smoky twist on the classic salmon salad with fresh tomatoes, cucumbers, onion, bell pepper, and crumbled feta cheese.",
+        saladDescription: 'A smoky twist on the classic salmon salad with fresh tomatoes, cucumbers, onion, bell pepper, and crumbled feta cheese.',
         defaultToppings: {
-          "Smoked Salmon": true,
-          Tomatoes: true,
-          Cucumbers: true,
-          Onions: false,
-          "Bell Pepper": true,
-          Feta: true
+          'Smoked Salmon': true,
+          'Tomatoes': true,
+          'Cucumbers': true,
+          'Onions': false,
+          'Bell Pepper': true,
+          'Feta': true
         },
         extraToppings: {
             'Extra Onion': false,
@@ -72,15 +72,15 @@ export const saladChoices = [
         price: '$20.00'
       },
       {
-        title: "SALMON CAESAR",
-        description: "Romaine lettuce, shaved parmesan, and croutons",
+        title: 'SALMON CAESAR',
+        description: 'Romaine lettuce, shaved parmesan, and croutons',
         img: salad,  // Replace "salad" with the actual image URL or reference
-        saladDescription: "A rich Caesar salad with romaine lettuce, shaved parmesan, croutons, and topped with salmon.",
+        saladDescription: 'A rich Caesar salad with romaine lettuce, shaved parmesan, croutons, and topped with salmon.',
         defaultToppings: {
-          Salmon: true,
-          "Romaine Lettuce": true,
-          "Shaved Parmesan": true,
-          Croutons: true
+          'Salmon': true,
+          'Romaine Lettuce': true,
+          'Shaved Parmesan': true,
+          'Croutons': true
         },
         extraToppings: {
             'Extra Onion': false,
@@ -94,16 +94,16 @@ export const saladChoices = [
         price: '$17.00'
       },
       {
-        title: "CHARLIES' STRAWBERRY CHICKEN",
-        description: "Onions, feta cheese, cranberry/pecan mix, and strawberries",
+        title: 'CHARLIES STRAWBERRY CHICKEN',
+        description: 'Onions, feta cheese, cranberry/pecan mix, and strawberries',
         img: salad,  // Replace "salad" with the actual image URL or reference
-        saladDescription: "A sweet and savory salad featuring onions, feta cheese, cranberry/pecan mix, and strawberries, topped with grilled chicken.",
+        saladDescription: 'A sweet and savory salad featuring onions, feta cheese, cranberry/pecan mix, and strawberries, topped with grilled chicken.',
         defaultToppings: {
-          Chicken: true,
-          Onions: true,
-          Feta: true,
-          "Cranberry/Pecan Mix": true,
-          Strawberries: true
+          'Chicken': true,
+          'Onions': true,
+          'Feta': true,
+          'Cranberry/Pecan Mix': true,
+          'Strawberries': true
         },
         extraToppings: {
             'Extra Onion': false,
@@ -117,18 +117,18 @@ export const saladChoices = [
         price: '$14.25'
       },
       {
-        title: "O LOIS' CHEF",
-        description: "Ham & turkey, cucumbers, tomatoes, onions, cheese, and bacon bits",
+        title: 'O LOIS CHEF',
+        description: 'Ham & turkey, cucumbers, tomatoes, onions, cheese, and bacon bits',
         img: salad,  // Replace "salad" with the actual image URL or reference
-        saladDescription: "A hearty chef salad with ham, turkey, cucumbers, tomatoes, onions, cheese, and crispy bacon bits.",
+        saladDescription: 'A hearty chef salad with ham, turkey, cucumbers, tomatoes, onions, cheese, and crispy bacon bits.',
         defaultToppings: {
-          Ham: true,
-          Turkey: true,
-          Cucumbers: true,
-          Tomatoes: true,
-          Onions: true,
-          Cheese: true,
-          "Bacon Bits": true
+          'Ham': true,
+          'Turkey': true,
+          'Cucumbers': true,
+          'Tomatoes': true,
+          'Onions': true,
+          'Cheese': true,
+          'Bacon Bits': true
         },
         extraToppings: {
             'Extra Onion': false,
@@ -142,16 +142,16 @@ export const saladChoices = [
         price: '$14.25'
       },
       {
-        title: "OLA'S VEGGIE DELIGHT",
-        description: "Tomatoes, cucumbers, onions, banana peppers, and pickles",
+        title: 'OLAS VEGGIE DELIGHT',
+        description: 'Tomatoes, cucumbers, onions, banana peppers, and pickles',
         img: salad,  // Replace "salad" with the actual image URL or reference
-        saladDescription: "A veggie-packed salad with tomatoes, cucumbers, onions, banana peppers, and pickles.",
+        saladDescription: 'A veggie-packed salad with tomatoes, cucumbers, onions, banana peppers, and pickles.',
         defaultToppings: {
-          Tomatoes: true,
-          Cucumbers: true,
-          Onions: true,
-          "Banana Peppers": true,
-          Pickles: true
+          'Tomatoes': true,
+          'Cucumbers': true,
+          'Onions': true,
+          'Banana Peppers': true,
+          'Pickles': true
         },
         extraToppings: {
             'Extra Onion': false,
@@ -165,17 +165,17 @@ export const saladChoices = [
         price: '$13.25'
       },
       {
-        title: "GREEK SALAD",
-        description: "Tomatoes, onions, olives, bell pepper, banana pepper, and feta cheese",
+        title: 'GREEK SALAD',
+        description: 'Tomatoes, onions, olives, bell pepper, banana pepper, and feta cheese',
         img: salad,  // Replace "salad" with the actual image URL or reference
-        saladDescription: "A traditional Greek salad with tomatoes, onions, olives, bell pepper, banana pepper, and feta cheese.",
+        saladDescription: 'A traditional Greek salad with tomatoes, onions, olives, bell pepper, banana pepper, and feta cheese.',
         defaultToppings: {
-          Tomatoes: true,
-          Onions: true,
-          Olives: true,
-          "Bell Pepper": true,
-          "Banana Pepper": true,
-          Feta: true
+          'Tomatoes': true,
+          'Onions': true,
+          'Olives': true,
+          'Bell Pepper': true,
+          'Banana Pepper': true,
+          'Feta': true
         },
         extraToppings: {
             'Extra Onion': false,
@@ -189,17 +189,17 @@ export const saladChoices = [
         price: '$13.25'
       },
       {
-        title: "SHRIMP SALAD",
-        description: "Tomatoes, cucumber, onion, olives, and cheese",
+        title: 'SHRIMP SALAD',
+        description: 'Tomatoes, cucumber, onion, olives, and cheese',
         img: salad,  // Replace "salad" with the actual image URL or reference
-        saladDescription: "A seafood delight with shrimp, tomatoes, cucumber, onion, olives, and cheese.",
+        saladDescription: 'A seafood delight with shrimp, tomatoes, cucumber, onion, olives, and cheese.',
         defaultToppings: {
-          Shrimp: true,
-          Tomatoes: true,
-          Cucumbers: true,
-          Onions: true,
-          Olives: true,
-          Cheese: true
+          'Shrimp': true,
+          'Tomatoes': true,
+          'Cucumbers': true,
+          'Onions': true,
+          'Olives': true,
+          'Cheese': true
         },
         extraToppings: {
             'Extra Onion': false,
