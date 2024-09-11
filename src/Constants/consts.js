@@ -15,15 +15,15 @@ export const saladChoices = [
           'Feta': true
         },
         extraToppings: {
-            'Extra Onion + $1.00': {checked: false, price: 1},
+            'Extra Onion + $1.00': {checked: false, price: 1.00},
             'Extra Shrimp + $3.50':  {checked: false, price: 3.50},
             'Extra Strawberries + $1.00':{checked: false, price: 1},
-            'Extra Feta + $2.00': {checked: false, price: 2},
-            'Extra Dressing + $1.00': {checked: false, price: 1},
+            'Extra Feta + $2.00': {checked: false, price: 2.00},
+            'Extra Dressing + $1.00': {checked: false, price: 1.00},
             'Add Cheese + $1.50': {checked: false, price: 1.50},
 
         },
-        price: 17.00
+        price: `$${17.00.toFixed(2)}`
       },
       {
         title: "CHICKEN CAESAR SALAD",

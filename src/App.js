@@ -7,7 +7,7 @@ import ResponsiveAppBar from './Components/materialUI NAVbar/navBar';
 
 function App() {
 
-  const [ total, setTotal] = useState('$0.00')
+  const [ total, setTotal] = useState(0.00)
 
 
   return (

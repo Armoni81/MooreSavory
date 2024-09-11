@@ -15,7 +15,9 @@ import { styleForModalPopUp } from '../../Constants/consts';
 
 
 export default function SimpleContainer({ selectedSalad,  checkOutModal, setCheckOutModal, saladOptions, setSaladOptions, setTotal, total }) {
-    
+   
+    let valueToBeAdded;
+
     const handleClose = () => setCheckOutModal(false); 
 
     const saladInfo = Array(saladOptions.find(salad => salad.title === selectedSalad))
@@ -28,6 +30,7 @@ export default function SimpleContainer({ selectedSalad,  checkOutModal, setChec
             const saladIndex = newSaladOptions.findIndex(salad => salad.title === selectedSalad)
             const  selectedSaladDefaultToppingsArray = Object.keys(newSaladOptions[saladIndex].defaultToppings)
             const updatedSalad = { ...newSaladOptions[saladIndex]}
+
 
             if(selectedSaladDefaultToppingsArray.includes(event.target.value)){
                 if(saladIndex > -1){
@@ -48,43 +51,38 @@ export default function SimpleContainer({ selectedSalad,  checkOutModal, setChec
                 updatedSalad.extraToppings[topping] = updatedCheckedProp
                 newSaladOptions[saladIndex].extraToppings[topping] = updatedCheckedProp
          
-                calculateTotal(newSaladOptions,saladIndex,topping)
             }
-            
+
+            setTotal(updatedSalad.price)
+            let totalToBeAdded = calculateTotal(newSaladOptions,saladIndex,topping)
+   
+            setTotal(total => {
+            const removeDollarSign = Number(total.replace('$', '')) // sets total to a Number and removes the $
+
+            const newTotal = removeDollarSign + totalToBeAdded
+
+              return `$${newTotal.toFixed(2)}`
+            })
+     
             return newSaladOptions
         })
-    
+        
+
     }
 
+ 
     const calculateTotal = (newSaladOptions, saladIndex, topping) => {
+        let index = 0
+    
+        Object.values(newSaladOptions[saladIndex].extraToppings).forEach(obj => {
 
-        // if(newSaladOptions[saladIndex].extraToppings[topping].checked){
-        //     newSaladOptions[saladIndex].extraToppings[topping]
-        // }
-      
-       Object.values(newSaladOptions[saladIndex].extraToppings).map(el => {
-        // console.log(el.checked)
-                
-     
-                    setTotal(total =>{
-                        console.log(total,el.price,el.checked,'price')
-                        //bug if el.checked runs everyu check gets added twice on every new click 
-                        if(el.checked === true){
-                            total += el.price
-                            el.price = 0
-
-                        }else{
-                            console.log(el.price, 'should be 0')
-                            console.log( newSaladOptions[saladIndex].extraToppings[topping], 'word')
-                            el.price = saladOptions[saladIndex].extraToppings[topping].price
-                            ///stopped here kid
-                            total -= el.price
-                        }
-                       return total
-                    } )
-               
-       })
-    }
+        if(obj.checked){
+            index += obj.price
+        }        
+    })
+    console.log(index)
+    return index
+}
 
 
 
