@@ -9,7 +9,7 @@ export const saladChoices = [
         defaultToppings: {
           'Shrimp': true,
           'Tomatoes': true,
-          'Onions': false,
+          'Onions': true,
           'Strawberries': true,
           'Cranberry/Pecan Mix': true,
           'Feta': true
@@ -45,7 +45,7 @@ export const saladChoices = [
             'Add Cheese': false,
 
         },
-        price: '$13.75'
+        price:  `$${13.75.toFixed(2)}`
       },
       {
         title: 'SMOKED SALMON SALAD',
@@ -69,7 +69,7 @@ export const saladChoices = [
             'Add Cheese': false,
 
         },
-        price: '$20.00'
+        price:  `$${20.00.toFixed(2)}`
       },
       {
         title: 'SALMON CAESAR',
@@ -91,7 +91,7 @@ export const saladChoices = [
             'Add Cheese': false,
 
         },
-        price: '$17.00'
+        price:  `$${17.00.toFixed(2)}`
       },
       {
         title: 'CHARLIES STRAWBERRY CHICKEN',
@@ -114,7 +114,7 @@ export const saladChoices = [
             'Add Cheese': false,
 
         },
-        price: '$14.25'
+        price:  `$${14.25.toFixed(2)}`
       },
       {
         title: 'O LOIS CHEF',
@@ -139,7 +139,7 @@ export const saladChoices = [
             'Add Cheese': false,
 
         },
-        price: '$14.25'
+        price:  `$${14.25.toFixed(2)}`
       },
       {
         title: 'OLAS VEGGIE DELIGHT',
@@ -162,7 +162,7 @@ export const saladChoices = [
             'Add Cheese': false,
 
         },
-        price: '$13.25'
+        price:  `$${13.25.toFixed(2)}`
       },
       {
         title: 'GREEK SALAD',
@@ -186,7 +186,7 @@ export const saladChoices = [
             'Add Cheese': false,
 
         },
-        price: '$13.25'
+        price:  `$${13.25.toFixed(2)}`
       },
       {
         title: 'SHRIMP SALAD',
@@ -210,11 +210,36 @@ export const saladChoices = [
             'Add Cheese': false,
 
         },
-        price: '$16.00'
+        price:  `$${16.00.toFixed(2)}`
       }
       
    
   ];
+  export const saladInfo = [{
+    title: "MOORE SAVORY SHRIMP SALAD",
+    description: "Tomatoes, onions, strawberries, cranberry/pecan mix, feta cheese",
+    img: '',  // Replace "salad" with the actual image URL or reference
+    saladDescription: "A savory mix of shrimp, fresh tomatoes, onions, strawberries, and a cranberry/pecan mix, all topped with feta cheese.",
+    defaultToppings: {
+      'Shrimp': true,
+      'Tomatoes': true,
+      'Onions': true,
+      'Strawberries': true,
+      'Cranberry/Pecan Mix': true,
+      'Feta': true
+    },
+    extraToppings: {
+        'Extra Onion + $1.00': {checked: false, price: 1.00},
+        'Extra Shrimp + $3.50':  {checked: false, price: 3.50},
+        'Extra Strawberries + $1.00':{checked: false, price: 1},
+        'Extra Feta + $2.00': {checked: false, price: 2.00},
+        'Extra Dressing + $1.00': {checked: false, price: 1.00},
+        'Add Cheese + $1.50': {checked: false, price: 1.50},
+
+    },
+    price: `$${17.00.toFixed(2)}`
+  }]
+
 
   //Styles
 
@@ -224,7 +249,6 @@ export const saladChoices = [
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: "90%",
-    aspectRatio: "16 / 9",
     margin: "0 auto",
     bgcolor: 'background.paper',
     border: '2px solid #000',

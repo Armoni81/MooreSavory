@@ -1,4 +1,5 @@
 import * as React from 'react';
+//Material UI
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,6 +13,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+//Imported Images
 import saladLogo from '../../images/salad.png'
 
 const pages = ['Order'];
