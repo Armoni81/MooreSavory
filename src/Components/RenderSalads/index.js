@@ -15,20 +15,19 @@ import { saladChoices } from "../../Constants/consts";
 //Imported Components
 import OrderTaker from "../OrderTaker";
 
-const RenderSalads = ({ total, setTotal }) => {
+const RenderSalads = ({ total, setTotal, setSaladsAddedToCart, saladsAddedToCart }) => {
 
-    
+    console.log(saladsAddedToCart, 'in render')
 
-    const [ selectedSalad, setSelectedSalad ] = useState("MOORE SAVORY SHRIMP SALAD")
+    const [ selectedSalad, setSelectedSalad ] = useState("")
     const [ checkOutModal, setCheckOutModal ]= useState(false)
     const [ saladOptions, setSaladOptions ] = useState([{}])
-    const fetchSalads = async () => {
+    const [ checkedItems, setCheckedItems ] = useState([{}])
 
+    const fetchSalads = async () => {
         try{
             const res = await axios.get('http://localhost:8800/SaladsChoices')
-  
             setSaladOptions(res.data)
-            
         }
         catch(err){
             console.log(err)
@@ -37,21 +36,39 @@ const RenderSalads = ({ total, setTotal }) => {
     
     useEffect(() => {
         fetchSalads()
-        console.log('yolo')
+        // console.log('yolo')
     },[])
 
     
-
     const placeOrder = (id) => {
         setSelectedSalad(saladOptions[id].Title)
+        const userSelectedSalad = saladOptions[id].Title
+        console.log(userSelectedSalad, 'userselected')
         setCheckOutModal(true)
         setTotal(saladOptions[id].price)
-     }
-
+        setCheckedItems( items => {
+            let obj = {}
+            const salad = saladOptions.find(salad => salad.Title === userSelectedSalad)
+            console.log(salad, 'lastest')
+            const splitToArr = salad.defaultToppings.split(',')
+            splitToArr.map((el) => {
+                console.log(el, 'here el')
+                
+                obj[el] = true
+                
+            })
+            return obj
+        })
+    }
+    console.log(selectedSalad, 'selectedsalad')
+// console.log(saladOptions.length, 'length')
+   console.log(checkedItems, 'checked?')
     return(
         <Fragment>
         <div style = {{display:'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr)', gap: '10px', margin: '40px'}}>
-            { saladOptions.length > 0 ? 
+            { saladOptions.length === 0 ?   <div>
+                <p>Loading Salads...</p>
+                </div>:
                   saladOptions.map((salad, id) => {
                     return (
                         <Fragment key={id}>
@@ -79,11 +96,9 @@ const RenderSalads = ({ total, setTotal }) => {
                         </Fragment>
                     )
                 })
-            : <div>
-                <p>pushin p</p>
-                </div>}
+           }
         </div>
-        <OrderTaker selectedSalad={selectedSalad} checkOutModal={checkOutModal} setCheckOutModal={setCheckOutModal} saladOptions={saladOptions} setSaladOptions={setSaladOptions} total={total} setTotal={setTotal}/>
+        <OrderTaker selectedSalad={selectedSalad} checkOutModal={checkOutModal} setCheckOutModal={setCheckOutModal} saladOptions={saladOptions} setSaladOptions={setSaladOptions} total={total} setTotal={setTotal} checkedItems={checkedItems} setCheckedItems={setCheckedItems} setSaladsAddedToCart={setSaladsAddedToCart} saladsAddedToCart={saladsAddedToCart}/>
         </Fragment>
     )
 }

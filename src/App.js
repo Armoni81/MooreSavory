@@ -7,16 +7,18 @@ import ResponsiveAppBar from './Components/MuiNavBar/navBar';
 import RenderSalads from './Components/RenderSalads';
 import Salad from './Components/salad';
 import AddSalad from './Components/addSalad';
+import PrimarySearchAppBar from './Components/MuiNavBar/navBar';
 
 const App = () => {
   const [ total, setTotal] = useState(0.00)
-
+  const [ saladsAddedToCart, setSaladsAddedToCart ] = useState([{}])
+console.log(saladsAddedToCart, 'in app')
   return (
    <BrowserRouter> 
-     <ResponsiveAppBar />
+     <PrimarySearchAppBar total={total}/>
      <Routes>
       <Route path='/' element={<LandingPage/>}/>
-      <Route path='order' element={<RenderSalads total={total} setTotal= {setTotal}/>}/>
+      <Route path='order' element={<RenderSalads total={total} setTotal= {setTotal} saladsAddedToCart={saladsAddedToCart} setSaladsAddedToCart={setSaladsAddedToCart}/>}/>
       <Route path='/Salads' element={<Salad/>} />
       <Route path='/add' element={<AddSalad/>}/>
      </Routes>
