@@ -11,11 +11,13 @@ import PrimarySearchAppBar from './Components/MuiNavBar/navBar';
 
 const App = () => {
   const [ total, setTotal] = useState(0.00)
-  const [ saladsAddedToCart, setSaladsAddedToCart ] = useState([{}])
-console.log(saladsAddedToCart, 'in app')
+  const [ saladsAddedToCart, setSaladsAddedToCart ] = useState([])
+  const cartLength = saladsAddedToCart.length
+  
+
   return (
    <BrowserRouter> 
-     <PrimarySearchAppBar total={total}/>
+     <PrimarySearchAppBar cartLength={cartLength}/>
      <Routes>
       <Route path='/' element={<LandingPage/>}/>
       <Route path='order' element={<RenderSalads total={total} setTotal= {setTotal} saladsAddedToCart={saladsAddedToCart} setSaladsAddedToCart={setSaladsAddedToCart}/>}/>

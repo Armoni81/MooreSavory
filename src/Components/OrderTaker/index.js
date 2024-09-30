@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import axios from "axios";
 
 //Material UI
@@ -12,7 +12,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import { Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 //Imported Consts
-import { styleForModalPopUp, saladInfo } from "../../Constants/consts";
+import { styleForModalPopUp } from "../../Constants/consts";
 
 const OrderTaker = ({
   selectedSalad,
@@ -27,62 +27,45 @@ const OrderTaker = ({
   setSaladsAddedToCart,
   saladsAddedToCart,
 }) => {
-  //    useEffect(()=> {
-  //     setCheckedItems(() => {
-  //         saladOptions.map(el => {
-  //              [{
-  //                 [el.Title] : event.target.checked
-  //             }]
-  //         })
-  //     })
-  //    },[])
 
   const handleClose = () => {
     setCheckOutModal(false);
-    setCheckedItems([{}]); 
-
-    // setCheckedItems(item => {
-    //     const cacheItem =  [{...item}]
-    //     // ended here cacheItem in not a funcation so i cant  map over it. Im trying tp set every value that true in the checkItem obj set it to false
-    //     console.log(cacheItem, 'cacheitem')
-    //     cacheItem.map((el) => {
-    //         // console.log(el[
-    //         //     " Onions"
-    //         //     ], 'here el')
-    //         console.log(event.target, 'VALUEE')
-    //             console.log(el[event.target])
-    //         if(el[event.target.value] === true){
-    //             el[event.target.value] = false
-
-    //         }
-
-    //     })
-
-    //     return cacheItem
-    // })
+   
   };
   const renderSaladCustomizer = Array(
     saladOptions.find((salad) => salad.Title === selectedSalad)
   );
 
-  // console.log(renderSaladCustomizer, 'need it')
-
+  
   const handleCheckBoxBaseIngredients = (event, topping) => {
     setCheckedItems((items) => ({
-      ...items, // Spread the current state
+      ...items, // Spread the current state 
       [topping]: event.target.checked, // Update the specific topping
     }));
   };
-
+  
   const addToCart = () => {
-    alert(`Added to cart Total:${total}`);
+    alert(`Added to cart Total: ${total}`);
     setCheckOutModal(false);
-    setSaladsAddedToCart(salads => ({...salads, 'selectedToppings':checkedItems})) // 🚨stopped here need to figure out how to preserve  checkedITesm 
-  };
+    
+    const currentCheckedItems = checkedItems
+    console.log(checkedItems, 'checkedItems')
+    // Append new salad with selected toppings to the cart
+    console.log(currentCheckedItems, 'up') // stoppped HEE trying to figure out why ehen i add to sesion sotrage selectedtopping hads an empty array 
+    setSaladsAddedToCart(salads => [
+      ...salads, 
+      { selectedToppings: currentCheckedItems, title: selectedSalad, price: renderSaladCustomizer[0].price }
+    ]);
+    
+    // Clear the checked items after adding to cart
+    setCheckedItems([]);
+  };;
   console.log(saladsAddedToCart, 'ATC')
+  
+  sessionStorage.setItem('cart', JSON.stringify(saladsAddedToCart))
   // console.log(saladOptions, 'sa option')
   // console.log(checkedItems, 'checked?')
-  console.log(checkOutModal, "checkoutmodal");
+  // console.log(checkOutModal, "checkoutmodal");
   return (
     <div>
       {selectedSalad && checkOutModal

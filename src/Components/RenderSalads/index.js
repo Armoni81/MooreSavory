@@ -17,7 +17,7 @@ import OrderTaker from "../OrderTaker";
 
 const RenderSalads = ({ total, setTotal, setSaladsAddedToCart, saladsAddedToCart }) => {
 
-    console.log(saladsAddedToCart, 'in render')
+
 
     const [ selectedSalad, setSelectedSalad ] = useState("")
     const [ checkOutModal, setCheckOutModal ]= useState(false)
@@ -36,33 +36,31 @@ const RenderSalads = ({ total, setTotal, setSaladsAddedToCart, saladsAddedToCart
     
     useEffect(() => {
         fetchSalads()
-        // console.log('yolo')
+
     },[])
 
     
     const placeOrder = (id) => {
         setSelectedSalad(saladOptions[id].Title)
         const userSelectedSalad = saladOptions[id].Title
-        console.log(userSelectedSalad, 'userselected')
+        // console.log(userSelectedSalad, 'userselected')
         setCheckOutModal(true)
         setTotal(saladOptions[id].price)
         setCheckedItems( items => {
-            let obj = {}
-            const salad = saladOptions.find(salad => salad.Title === userSelectedSalad)
-            console.log(salad, 'lastest')
+            let obj = []
+            const toArray = Array(saladOptions[id])
+            const salad= toArray.find(salad => salad.Title === userSelectedSalad)
             const splitToArr = salad.defaultToppings.split(',')
-            splitToArr.map((el) => {
-                console.log(el, 'here el')
-                
+            splitToArr.map((el) => {      
                 obj[el] = true
                 
             })
             return obj
         })
     }
-    console.log(selectedSalad, 'selectedsalad')
-// console.log(saladOptions.length, 'length')
-   console.log(checkedItems, 'checked?')
+    // console.log(selectedSalad, 'selectedsalad')
+
+//    console.log(checkedItems, 'checked?')
     return(
         <Fragment>
         <div style = {{display:'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr)', gap: '10px', margin: '40px'}}>
