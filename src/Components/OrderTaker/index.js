@@ -1,6 +1,4 @@
 import * as React from "react";
-import { useEffect, useMemo, useState, useRef } from "react";
-import axios from "axios";
 
 //Material UI
 import Box from "@mui/material/Box";
@@ -14,18 +12,18 @@ import SendIcon from "@mui/icons-material/Send";
 //Imported Consts
 import { styleForModalPopUp } from "../../Constants/consts";
 
-const OrderTaker = ({
+const 
+OrderTaker = ({
   selectedSalad,
   checkOutModal,
   setCheckOutModal,
   saladOptions,
-  setSaladOptions,
-  setTotal,
   total,
   checkedItems,
   setCheckedItems,
   setSaladsAddedToCart,
   saladsAddedToCart,
+
 }) => {
 
   const handleClose = () => {
@@ -35,34 +33,56 @@ const OrderTaker = ({
   const renderSaladCustomizer = Array(
     saladOptions.find((salad) => salad.Title === selectedSalad)
   );
-
+console.log(renderSaladCustomizer, 'l')
   
   const handleCheckBoxBaseIngredients = (event, topping) => {
     setCheckedItems((items) => ({
       ...items, // Spread the current state 
       [topping]: event.target.checked, // Update the specific topping
     }));
+
   };
   
   const addToCart = () => {
     alert(`Added to cart Total: ${total}`);
     setCheckOutModal(false);
+    const sessionStorageItems = JSON.parse(sessionStorage.getItem('cart')) || []
+
+    const currentCheckedItems = checkedItems;
+    setSaladsAddedToCart(sessionStorageItems)
+    const trimmedSaladIngredients = Object.keys(currentCheckedItems).reduce((acc, key) => {
+      // Trim the key and add it to the new object
+      acc[key.trim()] = currentCheckedItems[key];
+      return acc;
+    }, {});
     
-    const currentCheckedItems = checkedItems
-    console.log(checkedItems, 'checkedItems')
+    // console.log(trimmedSaladIngredients, 'checkedItems');
+
+
     // Append new salad with selected toppings to the cart
-    console.log(currentCheckedItems, 'up') // stoppped HEE trying to figure out why ehen i add to sesion sotrage selectedtopping hads an empty array 
-    setSaladsAddedToCart(salads => [
-      ...salads, 
-      { selectedToppings: currentCheckedItems, title: selectedSalad, price: renderSaladCustomizer[0].price }
-    ]);
+    setSaladsAddedToCart(salads => {
+        const updatedCart = [
+          ...salads,
+          { selectedToppings: trimmedSaladIngredients, title: selectedSalad, price: renderSaladCustomizer[0].price }
+        ];
+        const stringify = JSON.stringify(updatedCart)
+        console.log(updatedCart, 'updatedCart');
+
+        // Store the updated cart in sessionStorage
+        sessionStorage.setItem('cart', stringify);
     
+        // Return the updated cart to update the state
+        console.log(updatedCart, 'here')
+        return updatedCart;
+    });
+
     // Clear the checked items after adding to cart
-    setCheckedItems([]);
-  };;
-  console.log(saladsAddedToCart, 'ATC')
+    // setCheckedItems([]);
+};
+
+  // console.log(JSON.parse(sessionStorage.getItem('cart')), 'sessionStorage after setting cart');
+  // console.log(saladsAddedToCart, 'ATC')
   
-  sessionStorage.setItem('cart', JSON.stringify(saladsAddedToCart))
   // console.log(saladOptions, 'sa option')
   // console.log(checkedItems, 'checked?')
   // console.log(checkOutModal, "checkoutmodal");
@@ -98,6 +118,7 @@ const OrderTaker = ({
                   </Typography>
                   <FormGroup>
                     {seperateEachTopping.map((topping, id) => {
+                      console.log(userSelectedSalad, 'HIIYA')
                       return (
                         <FormControlLabel
                           key={id}
@@ -120,18 +141,19 @@ const OrderTaker = ({
                         />
                       );
                     })}
-                    <Box sx={{ p: 2, bgcolor: "#bbfcfb" }}>
+                    {/* <Box sx={{ p: 2, bgcolor: "#bbfcfb" }}>
                       <Typography>EXTRAS</Typography>
-                      {/* {
+                   
+                      {
                         Object.keys(userSelectedSalad.extraToppings).map((extraTopping, id) => {
                           return(
                         
                             <FormControlLabel key={id} control={<Checkbox disableRipple checked={userSelectedSalad.extraToppings[extraTopping].checked} onChange={(event) => handleCheckBoxBaseIngredients(event,extraTopping) }  value={extraTopping}  />} label={extraTopping} />
 
                         )   
-                    }) */}
-                      {/* } */}
-                    </Box>
+                    }) }
+                
+                    </Box> */}
 
                     <Typography>{`Total:${total}`}</Typography>
                   </FormGroup>

@@ -63,6 +63,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function PrimarySearchAppBar({ cartLength }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const getSaladCart = JSON.parse(sessionStorage.getItem('cart')) || []
+
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -175,7 +177,7 @@ export default function PrimarySearchAppBar({ cartLength }) {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={cartLength} color="error">
+              <Badge badgeContent={getSaladCart.length} color="error">
                 <MailIcon />
               </Badge>
             </IconButton>

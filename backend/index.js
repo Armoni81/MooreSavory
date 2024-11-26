@@ -15,6 +15,7 @@ app.get("/SaladsChoices",(req,res) => {
     const q = 'SELECT * FROM `MooreSavory Salads`.`Salad Choices`;'
     db.query(q, (err,data)=> {
         if(err) return res.json(err)
+            console.log(data, 'data')
         return res.json(data)
     })
 })
