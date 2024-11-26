@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from 'react'
 
 //Material UI
 import Box from "@mui/material/Box";
@@ -23,9 +24,11 @@ OrderTaker = ({
   setCheckedItems,
   setSaladsAddedToCart,
   saladsAddedToCart,
+  setTotal
 
 }) => {
 
+  const [ extraCheckedItems, setExtraCheckedItems ] = useState({})
   const handleClose = () => {
     setCheckOutModal(false);
    
@@ -36,12 +39,37 @@ OrderTaker = ({
 console.log(renderSaladCustomizer, 'l')
   
   const handleCheckBoxBaseIngredients = (event, topping) => {
-    setCheckedItems((items) => ({
-      ...items, // Spread the current state 
-      [topping]: event.target.checked, // Update the specific topping
-    }));
-
+    let cacheCheckedItems;
+    setCheckedItems((items) => {
+      console.log(items, 'updated')
+      let updatedItems = {...items}
+      updatedItems[topping] = event.target.checked
+      
+      console.log(updatedItems[topping], topping, 'cache')
+      console.log(updatedItems, 'itemssss')
+      return updatedItems
+    }
+  );
+    
   };
+  const handleExtraToppingsCheckboxes = (event, topping ) => {
+
+    setExtraCheckedItems((items) => {
+
+      let updatedItems = {...items}
+      updatedItems[topping] = event.target.checked
+
+      return updatedItems
+    })
+    setTotal(total => {
+  if(event.target.checked){
+
+    const toNumber = Number(total) + 2
+    return String(toNumber) //bug here  add .00
+  }
+  return total - 2 //bug here  add .00
+    })
+  }
   
   const addToCart = () => {
     alert(`Added to cart Total: ${total}`);
@@ -75,13 +103,14 @@ console.log(renderSaladCustomizer, 'l')
         console.log(updatedCart, 'here')
         return updatedCart;
     });
-
     // Clear the checked items after adding to cart
     // setCheckedItems([]);
-};
-
+  };
+  
   // console.log(JSON.parse(sessionStorage.getItem('cart')), 'sessionStorage after setting cart');
   // console.log(saladsAddedToCart, 'ATC')
+  console.log(checkedItems, 'befor HTML')
+  console.log(extraCheckedItems, 'REID')
   
   // console.log(saladOptions, 'sa option')
   // console.log(checkedItems, 'checked?')
@@ -90,8 +119,11 @@ console.log(renderSaladCustomizer, 'l')
     <div>
       {selectedSalad && checkOutModal
         ? renderSaladCustomizer.map((userSelectedSalad, key) => {
+          console.log(userSelectedSalad, 'check')
             const seperateEachTopping =
               userSelectedSalad.defaultToppings.split(",");
+            const seperateEachExtraToopping = 
+              userSelectedSalad.extraToppings.split(",")
 
             return (
               <Modal
@@ -118,7 +150,7 @@ console.log(renderSaladCustomizer, 'l')
                   </Typography>
                   <FormGroup>
                     {seperateEachTopping.map((topping, id) => {
-                      console.log(userSelectedSalad, 'HIIYA')
+                      console.log(checkedItems[topping], 'checked')
                       return (
                         <FormControlLabel
                           key={id}
@@ -141,19 +173,20 @@ console.log(renderSaladCustomizer, 'l')
                         />
                       );
                     })}
-                    {/* <Box sx={{ p: 2, bgcolor: "#bbfcfb" }}>
+                    <Box sx={{ p: 2, bgcolor: "#bbfcfb" }}>
                       <Typography>EXTRAS</Typography>
                    
                       {
-                        Object.keys(userSelectedSalad.extraToppings).map((extraTopping, id) => {
+                        seperateEachExtraToopping.map((extraTopping, id) => {
+                          
                           return(
                         
-                            <FormControlLabel key={id} control={<Checkbox disableRipple checked={userSelectedSalad.extraToppings[extraTopping].checked} onChange={(event) => handleCheckBoxBaseIngredients(event,extraTopping) }  value={extraTopping}  />} label={extraTopping} />
+                            <FormControlLabel key={id} control={<Checkbox disableRipple checked={extraCheckedItems[extraTopping]}  onChange={(event) => handleExtraToppingsCheckboxes(event,extraTopping) }  value={extraTopping}  />} label={`${extraTopping} + $2.00`} />
 
                         )   
                     }) }
                 
-                    </Box> */}
+                    </Box>
 
                     <Typography>{`Total:${total}`}</Typography>
                   </FormGroup>
