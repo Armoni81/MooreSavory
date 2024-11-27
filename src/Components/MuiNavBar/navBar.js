@@ -176,8 +176,8 @@ export default function PrimarySearchAppBar({ cartLength }) {
           
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={getSaladCart.length} color="error">
+            <IconButton size="large" aria-label="show 4 new mails" color="inherit" href='/cart'>
+              <Badge badgeContent={getSaladCart.length} color="error" >
                 <MailIcon />
               </Badge>
             </IconButton>
