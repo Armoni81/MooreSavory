@@ -10,8 +10,7 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import Alert from '@mui/material/Alert';
-import CheckIcon from '@mui/icons-material/Check';
+
 //Imported Consts
 import { styleForModalPopUp } from "../../Constants/consts";
 
@@ -176,10 +175,10 @@ OrderTaker = ({
                    
                       {
                         seperateEachExtraToopping.map((extraTopping, id) => {
-                          
+                
                           return(
                         
-                            <FormControlLabel key={id} control={<Checkbox disableRipple checked={extraCheckedItems[extraTopping]}  onChange={(event) => handleExtraToppingsCheckboxes(event,extraTopping) }  value={extraTopping}  />} label={`${extraTopping} + $2.00`} />
+                            <FormControlLabel key={id} control={<Checkbox disableRipple checked={extraCheckedItems[extraTopping] || false}  onChange={(event) => handleExtraToppingsCheckboxes(event,extraTopping) }  value={extraTopping}  />} label={`${extraTopping} + $2.00`} />
 
                         )   
                     }) }
