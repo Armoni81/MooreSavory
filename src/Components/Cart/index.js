@@ -6,17 +6,21 @@ import Button from '@mui/material/Button';
 
 
 const Cart = ({saladsAddedToCart, setSaladsAddedToCart, total, setTotal }) => {
-    // setSaladsAddedToCart(JSON.parse(sessionStorage.getItem('cart')))
 
-    // console.log(saladsAddedToCart, 'tyo')
 const grabSalads = JSON.parse(sessionStorage.getItem('cart'))
-// console.log(grabSalads, 'in cart')
+
 
 const removeSalad = (key) => {
     const items = JSON.parse(sessionStorage.getItem('cart'))
-    delete items[key]
-    console.log(items)
-    // console.log(items[key], 'items')
+    items.splice(key,1)
+    sessionStorage.setItem('cart',JSON.stringify(items) )
+
+    if(items.length <= 0){
+        window.location.href = '/order'
+    }
+    setTotal('0.00')
+
+
 }
     return (
         <React.Fragment>
@@ -27,7 +31,6 @@ const removeSalad = (key) => {
             {
                 grabSalads.map((el, key) => {
                  const trueValues = Object.keys(el.selectedToppings).filter(value => el.selectedToppings[value])
-                    console.log(trueValues, 'truevales')
                     return (
                         <Box key={key} sx={{ bgcolor: 'white', padding: '20px'}}>
                             <p>{`(${key+ 1}) Price: ${el.price}`}</p>

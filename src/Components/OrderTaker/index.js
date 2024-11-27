@@ -36,17 +36,14 @@ OrderTaker = ({
   const renderSaladCustomizer = Array(
     saladOptions.find((salad) => salad.Title === selectedSalad)
   );
-console.log(renderSaladCustomizer, 'l')
+
   
   const handleCheckBoxBaseIngredients = (event, topping) => {
-    let cacheCheckedItems;
+  
     setCheckedItems((items) => {
-      console.log(items, 'updated')
+
       let updatedItems = {...items}
       updatedItems[topping] = event.target.checked
-      
-      console.log(updatedItems[topping], topping, 'cache')
-      console.log(updatedItems, 'itemssss')
       return updatedItems
     }
   );
@@ -75,16 +72,16 @@ console.log(renderSaladCustomizer, 'l')
     alert(`Added to cart Total: ${total}`);
     setCheckOutModal(false);
     const sessionStorageItems = JSON.parse(sessionStorage.getItem('cart')) || []
-
     const currentCheckedItems = checkedItems;
     setSaladsAddedToCart(sessionStorageItems)
+    setExtraCheckedItems([])
     const trimmedSaladIngredients = Object.keys(currentCheckedItems).reduce((acc, key) => {
       // Trim the key and add it to the new object
       acc[key.trim()] = currentCheckedItems[key];
       return acc;
     }, {});
     
-    // console.log(trimmedSaladIngredients, 'checkedItems');
+ 
 
 
     // Append new salad with selected toppings to the cart
@@ -94,7 +91,7 @@ console.log(renderSaladCustomizer, 'l')
           { selectedToppings: trimmedSaladIngredients, title: selectedSalad, price: total }
         ];
         const stringify = JSON.stringify(updatedCart)
-        console.log(updatedCart, 'updatedCart');
+
 
         // Store the updated cart in sessionStorage
         sessionStorage.setItem('cart', stringify);

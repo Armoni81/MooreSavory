@@ -30,7 +30,7 @@ const AddSalad = ()=> {
             console.log(err)
         }
         const res = await axios.get('http://localhost:8800/SaladsChoices')
-        console.log(res.data, 'resss')
+  
     }
 console.log(input)
     return(
