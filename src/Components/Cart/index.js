@@ -5,7 +5,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 
 
-const Cart = ({saladsAddedToCart, setSaladsAddedToCart}) => {
+const Cart = ({saladsAddedToCart, setSaladsAddedToCart, total, setTotal }) => {
     // setSaladsAddedToCart(JSON.parse(sessionStorage.getItem('cart')))
 
     // console.log(saladsAddedToCart, 'tyo')

@@ -91,7 +91,7 @@ console.log(renderSaladCustomizer, 'l')
     setSaladsAddedToCart(salads => {
         const updatedCart = [
           ...salads,
-          { selectedToppings: trimmedSaladIngredients, title: selectedSalad, price: renderSaladCustomizer[0].price }
+          { selectedToppings: trimmedSaladIngredients, title: selectedSalad, price: total }
         ];
         const stringify = JSON.stringify(updatedCart)
         console.log(updatedCart, 'updatedCart');

@@ -23,7 +23,7 @@ const App = () => {
       <Route path='order' element={<RenderSalads total={total} setTotal= {setTotal} saladsAddedToCart={saladsAddedToCart} setSaladsAddedToCart={setSaladsAddedToCart}/>} />
       <Route path='/Salads' element={<Salad/>} />
       <Route path='/add' element={<AddSalad/>}/>
-      <Route path='/cart' element={<Cart saladsAddedToCart={saladsAddedToCart} setSaladsAddedToCart={setSaladsAddedToCart}/>}/>
+      <Route path='/cart' element={<Cart saladsAddedToCart={saladsAddedToCart} setSaladsAddedToCart={setSaladsAddedToCart} total={total} setTotal={setTotal}/>}/>
      </Routes>
    </BrowserRouter>
   );
