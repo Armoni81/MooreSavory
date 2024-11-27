@@ -1,24 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Routes, Route} from 'react-router-dom'
+import { useState, useRef } from 'react';
+//Imported Components
+import LandingPage from './Components/LandingPage/landingPage';
+import ResponsiveAppBar from './Components/MuiNavBar/navBar';
+import RenderSalads from './Components/RenderSalads';
+import Salad from './Components/salad';
+import AddSalad from './Components/addSalad';
+import PrimarySearchAppBar from './Components/MuiNavBar/navBar';
+import Cart from './Components/Cart';
 
-function App() {
+const App = () => {
+  const [ total, setTotal] = useState(0.00)
+  const [ saladsAddedToCart, setSaladsAddedToCart ] = useState([])
+
+  const cartLength = saladsAddedToCart.length
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          DRZ Commit
-        </a>
-      </header>
-    </div>
+   <BrowserRouter> 
+     <PrimarySearchAppBar cartLength={cartLength}/>
+     <Routes>
+      <Route path='/' element={<LandingPage/>}/>
+      <Route path='order' element={<RenderSalads total={total} setTotal= {setTotal} saladsAddedToCart={saladsAddedToCart} setSaladsAddedToCart={setSaladsAddedToCart}/>} />
+      <Route path='/Salads' element={<Salad/>} />
+      <Route path='/add' element={<AddSalad/>}/>
+      <Route path='/cart' element={<Cart saladsAddedToCart={saladsAddedToCart} setSaladsAddedToCart={setSaladsAddedToCart} total={total} setTotal={setTotal}/>}/>
+     </Routes>
+   </BrowserRouter>
   );
 }
 
