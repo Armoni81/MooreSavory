@@ -72,7 +72,7 @@ const RenderSalads = ({ total, setTotal, setSaladsAddedToCart, saladsAddedToCart
         <Fragment>
             { successMessage ? 
             <div>
-                <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
+                <Alert icon={<CheckIcon fontSize="inherit" />}  variant="filled" severity="success">
                 Successfully added to Cart
                 </Alert>
             </div>
