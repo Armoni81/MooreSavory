@@ -10,6 +10,9 @@ import CardActions from '@mui/material/CardActions';
 import { Button } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import Typography from '@mui/material/Typography';
+import Alert from '@mui/material/Alert';
+import CheckIcon from '@mui/icons-material/Check';
+
 //Imported Consts
 import { saladChoices } from "../../Constants/consts";
 //Imported Components
@@ -23,6 +26,7 @@ const RenderSalads = ({ total, setTotal, setSaladsAddedToCart, saladsAddedToCart
     const [ checkOutModal, setCheckOutModal ]= useState(false)
     const [ saladOptions, setSaladOptions ] = useState([{}])
     const [ checkedItems, setCheckedItems ] = useState([{}])
+    const [ successMessage, setSuccessMessage ] = useState(false)
 
     const fetchSalads = async () => {
         try{
@@ -61,8 +65,20 @@ const RenderSalads = ({ total, setTotal, setSaladsAddedToCart, saladsAddedToCart
     // console.log(selectedSalad, 'selectedsalad')
 
 //    console.log(checkedItems, 'checked?')
+{/* <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
+      Here is a gentle confirmation that your action was successful.
+    </Alert> */}
     return(
         <Fragment>
+            { successMessage ? 
+            <div>
+                <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
+                Successfully added to Cart
+                </Alert>
+            </div>
+            : null
+
+            }
         <div style = {{display:'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr)', gap: '10px', margin: '40px'}}>
             { saladOptions.length === 0 ?   <div>
                 <p>Loading Salads...</p>
@@ -96,7 +112,7 @@ const RenderSalads = ({ total, setTotal, setSaladsAddedToCart, saladsAddedToCart
                 })
            }
         </div>
-        <OrderTaker selectedSalad={selectedSalad} checkOutModal={checkOutModal} setCheckOutModal={setCheckOutModal} saladOptions={saladOptions} setSaladOptions={setSaladOptions} total={total} setTotal={setTotal} checkedItems={checkedItems} setCheckedItems={setCheckedItems} setSaladsAddedToCart={setSaladsAddedToCart} saladsAddedToCart={saladsAddedToCart}/>
+        <OrderTaker selectedSalad={selectedSalad} checkOutModal={checkOutModal} setCheckOutModal={setCheckOutModal} saladOptions={saladOptions} setSaladOptions={setSaladOptions} total={total} setTotal={setTotal} checkedItems={checkedItems} setCheckedItems={setCheckedItems} setSaladsAddedToCart={setSaladsAddedToCart} saladsAddedToCart={saladsAddedToCart} setSuccessMessage={setSuccessMessage}/>
         </Fragment>
     )
 }

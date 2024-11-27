@@ -10,6 +10,8 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
+import Alert from '@mui/material/Alert';
+import CheckIcon from '@mui/icons-material/Check';
 //Imported Consts
 import { styleForModalPopUp } from "../../Constants/consts";
 
@@ -24,11 +26,13 @@ OrderTaker = ({
   setCheckedItems,
   setSaladsAddedToCart,
   saladsAddedToCart,
-  setTotal
+  setTotal,
+  setSuccessMessage
 
 }) => {
 
   const [ extraCheckedItems, setExtraCheckedItems ] = useState({})
+ 
   const handleClose = () => {
     setCheckOutModal(false);
    
@@ -100,18 +104,15 @@ OrderTaker = ({
         console.log(updatedCart, 'here')
         return updatedCart;
     });
+    setSuccessMessage(true)
+    setTimeout(()=> {
+      setSuccessMessage(false)
+    }, 3000)
     // Clear the checked items after adding to cart
     // setCheckedItems([]);
   };
   
-  // console.log(JSON.parse(sessionStorage.getItem('cart')), 'sessionStorage after setting cart');
-  // console.log(saladsAddedToCart, 'ATC')
-  console.log(checkedItems, 'befor HTML')
-  console.log(extraCheckedItems, 'REID')
-  
-  // console.log(saladOptions, 'sa option')
-  // console.log(checkedItems, 'checked?')
-  // console.log(checkOutModal, "checkoutmodal");
+
   return (
     <div>
       {selectedSalad && checkOutModal
