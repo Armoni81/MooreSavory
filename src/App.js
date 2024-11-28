@@ -20,7 +20,7 @@ const App = () => {
      <PrimarySearchAppBar cartLength={cartLength}/>
      <Routes>
       <Route path='/' element={<LandingPage/>}/>
-      <Route path='order' element={<RenderSalads total={total} setTotal= {setTotal} saladsAddedToCart={saladsAddedToCart} setSaladsAddedToCart={setSaladsAddedToCart}/>} />
+      <Route path='/order' element={<RenderSalads total={total} setTotal= {setTotal} saladsAddedToCart={saladsAddedToCart} setSaladsAddedToCart={setSaladsAddedToCart}/>} />
       <Route path='/Salads' element={<Salad/>} />
       <Route path='/add' element={<AddSalad/>}/>
       <Route path='/cart' element={<Cart saladsAddedToCart={saladsAddedToCart} setSaladsAddedToCart={setSaladsAddedToCart} total={total} setTotal={setTotal}/>}/>
