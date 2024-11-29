@@ -1,27 +1,36 @@
 import React from "react";
+import { useState } from "react";
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
+import { Typography } from "@mui/material";
+import Divider from '@mui/material/Divider';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 
-const Cart = ({saladsAddedToCart, setSaladsAddedToCart, total, setTotal }) => {
+const Cart = ({saladsAddedToCart, setSaladsAddedToCart, total, setTotal, cartTotal, setCartTotal }) => {
+
+
 
 const grabSalads = JSON.parse(sessionStorage.getItem('cart'))
 const navigatePage = useNavigate()
 
 console.log(grabSalads, 'yoo')
 const removeSalad = (key) => {
+    console.log(key, 'key')
     const items = JSON.parse(sessionStorage.getItem('cart'))
+    console.log(items, 'b4 splice')
     items.splice(key,1)
+    console.log(items, 'after splice')
     sessionStorage.setItem('cart',JSON.stringify(items) )
 
     if(items.length <= 0){
         window.location.href = '/order'
     }
-    setTotal('0.00')
+    setSaladsAddedToCart(items)
+    // setTotal('0.00')
 
 
 }
@@ -58,7 +67,7 @@ const placeOrder =  async () => {
     grabSalads.length ===  0 ? 
         <div>
           <p> You have not added any Savory Salads to your to your car yet!</p>  
-          <button onClick={() => navigatePage('/order')}>Get started</button>
+          <Button size="medium" variant="contained" onClick={() => navigatePage('/order')}>Get started</Button>
         </div> 
         :
         <div>
@@ -66,17 +75,21 @@ const placeOrder =  async () => {
                 grabSalads.map((el, key) => { 
                     const trueValues = Object.keys(el.selectedToppings).filter(value => el.selectedToppings[value]);
                     return (
-                        <Box key={key} sx={{ bgcolor: 'white', padding: '20px' }}>
-                            <p>{`(${key + 1}) Price: ${el.price}`}</p>
-                            <p>{`Title: ${el.title}`}</p>
-                            <p>{`Toppings: ${trueValues.join(', ')}`}</p>
-                            <button onClick={() => removeSalad(key)}>Delete</button>
-                        </Box>
+                        <React.Fragment>
+                            <Box key={key} sx={{ bgcolor: 'white', padding: '20px' }}>
+                                <Typography> {`Price: ${el.price}`}</Typography>
+                                <Typography>{`Title: ${el.title}`}</Typography>
+                                <Typography>{`Toppings: ${trueValues.join(', ')}`}</Typography>
+                                <Button size="small" variant="outlined">Edit</Button>
+                                <Button size="small" variant="outlined" onClick={() => removeSalad(key)}>Delete</Button>
+                            </Box>
+                            <Divider />
+                        </React.Fragment>
                     );
                 })
             }
         
-            <h1>Total: </h1>
+            <h1>Total:0 </h1>
     <Button variant="contained" onClick={() => placeOrder()}>Place Order</Button>
         </div>
 }

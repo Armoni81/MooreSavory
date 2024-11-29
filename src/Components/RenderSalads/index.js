@@ -12,13 +12,15 @@ import SendIcon from '@mui/icons-material/Send';
 import Typography from '@mui/material/Typography';
 import Alert from '@mui/material/Alert';
 import CheckIcon from '@mui/icons-material/Check';
+import Chip from '@mui/material/Chip';
+import { useNavigate } from 'react-router-dom'
 
 //Imported Consts
 import { saladChoices } from "../../Constants/consts";
 //Imported Components
 import OrderTaker from "../OrderTaker";
 
-const RenderSalads = ({ total, setTotal, setSaladsAddedToCart, saladsAddedToCart }) => {
+const RenderSalads = ({ total, setTotal, setSaladsAddedToCart, saladsAddedToCart, cartTotal, setCartTotal }) => {
 
 
 
@@ -27,6 +29,10 @@ const RenderSalads = ({ total, setTotal, setSaladsAddedToCart, saladsAddedToCart
     const [ saladOptions, setSaladOptions ] = useState([{}])
     const [ checkedItems, setCheckedItems ] = useState([{}])
     const [ successMessage, setSuccessMessage ] = useState(false)
+   
+
+
+    const navigatePage = useNavigate()
 
     const fetchSalads = async () => {
         try{
@@ -42,7 +48,6 @@ const RenderSalads = ({ total, setTotal, setSaladsAddedToCart, saladsAddedToCart
         fetchSalads()
 
     },[])
-
     
     const placeOrder = (id) => {
         setSelectedSalad(saladOptions[id].Title)
@@ -62,20 +67,24 @@ const RenderSalads = ({ total, setTotal, setSaladsAddedToCart, saladsAddedToCart
             return obj
         })
     }
-    // console.log(selectedSalad, 'selectedsalad')
-
-//    console.log(checkedItems, 'checked?')
-{/* <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
-      Here is a gentle confirmation that your action was successful.
-    </Alert> */}
     return(
         <Fragment>
             { successMessage ? 
-            <div>
-                <Alert icon={<CheckIcon fontSize="inherit" />}  variant="filled" severity="success">
-                Successfully added to Cart
-                </Alert>
-            </div>
+           <Alert 
+           icon={<CheckIcon fontSize="inherit" />}  
+           variant="filled" 
+           severity="success" 
+         >
+           Successfully added to Cart
+           <Chip 
+             label="Go to Cart" 
+             onClick={() => navigatePage('/cart')} 
+             variant="outlined" 
+             size="small" 
+             style={{ marginLeft: '16px' }} // Adds space between the Chip and Alert text
+           />
+         </Alert>
+         
             : null
 
             }
@@ -112,7 +121,7 @@ const RenderSalads = ({ total, setTotal, setSaladsAddedToCart, saladsAddedToCart
                 })
            }
         </div>
-        <OrderTaker selectedSalad={selectedSalad} checkOutModal={checkOutModal} setCheckOutModal={setCheckOutModal} saladOptions={saladOptions} setSaladOptions={setSaladOptions} total={total} setTotal={setTotal} checkedItems={checkedItems} setCheckedItems={setCheckedItems} setSaladsAddedToCart={setSaladsAddedToCart} saladsAddedToCart={saladsAddedToCart} setSuccessMessage={setSuccessMessage}/>
+        <OrderTaker selectedSalad={selectedSalad} checkOutModal={checkOutModal} setCheckOutModal={setCheckOutModal} saladOptions={saladOptions} setSaladOptions={setSaladOptions} total={total} setTotal={setTotal} checkedItems={checkedItems} setCheckedItems={setCheckedItems} setSaladsAddedToCart={setSaladsAddedToCart} saladsAddedToCart={saladsAddedToCart} setSuccessMessage={setSuccessMessage} cartTotal={cartTotal} setCartTotal={setCartTotal}/>
         </Fragment>
     )
 }
