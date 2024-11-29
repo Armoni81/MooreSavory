@@ -72,7 +72,7 @@ OrderTaker = ({
   }
   
   const addToCart = () => {
-    alert(`Added to cart Total: ${total}`);
+
     setCheckOutModal(false);
     const sessionStorageItems = JSON.parse(sessionStorage.getItem('cart')) || []
     const currentCheckedItems = checkedItems;
