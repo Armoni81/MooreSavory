@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from 'react'
+import { useState } from "react";
 
 //Material UI
 import Box from "@mui/material/Box";
@@ -14,8 +14,7 @@ import SendIcon from "@mui/icons-material/Send";
 //Imported Consts
 import { styleForModalPopUp } from "../../Constants/consts";
 
-const 
-OrderTaker = ({
+const OrderTaker = ({
   selectedSalad,
   checkOutModal,
   setCheckOutModal,
@@ -26,101 +25,93 @@ OrderTaker = ({
   setSaladsAddedToCart,
   saladsAddedToCart,
   setTotal,
-  setSuccessMessage
-
+  setSuccessMessage,
 }) => {
+  const [extraCheckedItems, setExtraCheckedItems] = useState({});
 
-  const [ extraCheckedItems, setExtraCheckedItems ] = useState({})
- 
   const handleClose = () => {
     setCheckOutModal(false);
-   
   };
   const renderSaladCustomizer = Array(
     saladOptions.find((salad) => salad.Title === selectedSalad)
   );
 
-  
   const handleCheckBoxBaseIngredients = (event, topping) => {
-  
     setCheckedItems((items) => {
-
-      let updatedItems = {...items}
-      updatedItems[topping] = event.target.checked
-      return updatedItems
-    }
-  );
-    
+      let updatedItems = { ...items };
+      updatedItems[topping] = event.target.checked;
+      return updatedItems;
+    });
   };
-  const handleExtraToppingsCheckboxes = (event, topping ) => {
-
+  const handleExtraToppingsCheckboxes = (event, topping) => {
     setExtraCheckedItems((items) => {
+      let updatedItems = { ...items };
+      updatedItems[topping] = event.target.checked;
 
-      let updatedItems = {...items}
-      updatedItems[topping] = event.target.checked
+      return updatedItems;
+    });
+    setTotal((total) => {
+      if (event.target.checked) {
+        const toNumber = Number(total) + 2;
+        return String(toNumber); //bug here  add .00
+      }
+      return total - 2; //bug here  add .00
+    });
+  };
 
-      return updatedItems
-    })
-    setTotal(total => {
-  if(event.target.checked){
-
-    const toNumber = Number(total) + 2
-    return String(toNumber) //bug here  add .00
-  }
-  return total - 2 //bug here  add .00
-    })
-  }
-  
   const addToCart = () => {
-
     setCheckOutModal(false);
-    const sessionStorageItems = JSON.parse(sessionStorage.getItem('cart')) || []
+    const sessionStorageItems =
+      JSON.parse(sessionStorage.getItem("cart")) || [];
     const currentCheckedItems = checkedItems;
-    setSaladsAddedToCart(sessionStorageItems)
-    setExtraCheckedItems([])
-    const trimmedSaladIngredients = Object.keys(currentCheckedItems).reduce((acc, key) => {
-      // Trim the key and add it to the new object
-      acc[key.trim()] = currentCheckedItems[key];
-      return acc;
-    }, {});
-    
- 
-
+    setSaladsAddedToCart(sessionStorageItems);
+    setExtraCheckedItems([]);
+    const trimmedSaladIngredients = Object.keys(currentCheckedItems).reduce(
+      (acc, key) => {
+        // Trim the key and add it to the new object
+        acc[key.trim()] = currentCheckedItems[key];
+        return acc;
+      },
+      {}
+    );
 
     // Append new salad with selected toppings to the cart
-    setSaladsAddedToCart(salads => {
-        const updatedCart = [
-          ...salads,
-          { selectedToppings: trimmedSaladIngredients, extraCheckedItems:extraCheckedItems, title: selectedSalad, price: total }
-        ];
-        const stringify = JSON.stringify(updatedCart)
+    setSaladsAddedToCart((salads) => {
+      const updatedCart = [
+        ...salads,
+        {
+          selectedToppings: trimmedSaladIngredients,
+          extraCheckedItems: extraCheckedItems,
+          title: selectedSalad,
+          price: total,
+        },
+      ];
+      const stringify = JSON.stringify(updatedCart);
 
+      // Store the updated cart in sessionStorage
+      sessionStorage.setItem("cart", stringify);
 
-        // Store the updated cart in sessionStorage
-        sessionStorage.setItem('cart', stringify);
-    
-        // Return the updated cart to update the state
-        console.log(updatedCart, 'here')
-        return updatedCart;
+      // Return the updated cart to update the state
+      console.log(updatedCart, "here");
+      return updatedCart;
     });
-    setSuccessMessage(true)
-    setTimeout(()=> {
-      setSuccessMessage(false)
-    }, 3000)
+    setSuccessMessage(true);
+    setTimeout(() => {
+      setSuccessMessage(false);
+    }, 3000);
     // Clear the checked items after adding to cart
     // setCheckedItems([]);
   };
-  
 
   return (
     <div>
       {selectedSalad && checkOutModal
         ? renderSaladCustomizer.map((userSelectedSalad, key) => {
-          console.log(userSelectedSalad, 'check')
+            console.log(userSelectedSalad, "check");
             const seperateEachTopping =
               userSelectedSalad.defaultToppings.split(",");
-            const seperateEachExtraToopping = 
-              userSelectedSalad.extraToppings.split(",")
+            const seperateEachExtraToopping =
+              userSelectedSalad.extraToppings.split(",");
 
             return (
               <Modal
@@ -147,7 +138,7 @@ OrderTaker = ({
                   </Typography>
                   <FormGroup>
                     {seperateEachTopping.map((topping, id) => {
-                      console.log(checkedItems[topping], 'checked')
+                      console.log(checkedItems[topping], "checked");
                       return (
                         <FormControlLabel
                           key={id}
@@ -172,17 +163,30 @@ OrderTaker = ({
                     })}
                     <Box sx={{ p: 2, bgcolor: "#bbfcfb" }}>
                       <Typography>EXTRAS</Typography>
-                   
-                      {
-                        seperateEachExtraToopping.map((extraTopping, id) => {
-                
-                          return(
-                        
-                            <FormControlLabel key={id} control={<Checkbox disableRipple checked={extraCheckedItems[extraTopping] || false}  onChange={(event) => handleExtraToppingsCheckboxes(event,extraTopping) }  value={extraTopping}  />} label={`${extraTopping} + $2.00`} />
 
-                        )   
-                    }) }
-                
+                      {seperateEachExtraToopping.map((extraTopping, id) => {
+                        return (
+                          <FormControlLabel
+                            key={id}
+                            control={
+                              <Checkbox
+                                disableRipple
+                                checked={
+                                  extraCheckedItems[extraTopping] || false
+                                }
+                                onChange={(event) =>
+                                  handleExtraToppingsCheckboxes(
+                                    event,
+                                    extraTopping
+                                  )
+                                }
+                                value={extraTopping}
+                              />
+                            }
+                            label={`${extraTopping} + $2.00`}
+                          />
+                        );
+                      })}
                     </Box>
 
                     <Typography>{`Total:${total}`}</Typography>
