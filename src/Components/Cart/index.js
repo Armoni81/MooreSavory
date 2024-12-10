@@ -5,7 +5,11 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import { Typography } from "@mui/material";
+import IconButton from '@mui/material/IconButton';
+import { Badge } from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
 import Divider from '@mui/material/Divider';
+import EditIcon from '@mui/icons-material/Edit';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -35,17 +39,10 @@ const removeSalad = (key) => {
 
 }
 const placeOrder =  async () => {
-    const z = {salad: 'Armoni', total: 9, toppings: 'toppin'}
-    console.log(z.salad, z.total, z.toppings)
     grabSalads[0]['name'] = 'Armoni'
-    console.log(grabSalads, 'grabem')
-
     for(let key in grabSalads){
-       
         grabSalads[key]['name'] = 'Armoni'
     }
-
-
     try{
       await  axios.post("http://localhost:8800/customerOrder", grabSalads )
         console.log('hi')
@@ -73,15 +70,26 @@ const placeOrder =  async () => {
         <div>
             { 
                 grabSalads.map((el, key) => { 
-                    const trueValues = Object.keys(el.selectedToppings).filter(value => el.selectedToppings[value]);
+                    const trueValuesBaseToppings = Object.keys(el.selectedToppings).filter(value => el.selectedToppings[value]);
+                    const trueValuesExtraToppings = Object.keys(el.extraCheckedItems).filter(value => el.extraCheckedItems[value]);
+                    console.log(trueValuesExtraToppings, 'need')
                     return (
                         <React.Fragment>
                             <Box key={key} sx={{ bgcolor: 'white', padding: '20px' }}>
                                 <Typography> {`Price: ${el.price}`}</Typography>
                                 <Typography>{`Title: ${el.title}`}</Typography>
-                                <Typography>{`Toppings: ${trueValues.join(', ')}`}</Typography>
-                                <Button size="small" variant="outlined">Edit</Button>
-                                <Button size="small" variant="outlined" onClick={() => removeSalad(key)}>Delete</Button>
+                                <Typography>{`Toppings: ${trueValuesBaseToppings.join(' | ')}`}</Typography>
+                                <Typography>{`Extra Toppings: ${trueValuesExtraToppings.join(' | ')}`}</Typography>
+                                <IconButton>
+                                    <Badge>
+                                        <EditIcon/>
+                                    </Badge>
+                                </IconButton>
+                                <IconButton>
+                                    <Badge>
+                                        <DeleteIcon onClick={() => removeSalad(key)}/>
+                                    </Badge>
+                                </IconButton>
                             </Box>
                             <Divider />
                         </React.Fragment>

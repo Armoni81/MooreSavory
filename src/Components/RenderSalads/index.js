@@ -14,6 +14,7 @@ import Alert from '@mui/material/Alert';
 import CheckIcon from '@mui/icons-material/Check';
 import Chip from '@mui/material/Chip';
 import { useNavigate } from 'react-router-dom'
+import CircularProgress from '@mui/material/CircularProgress';
 
 //Imported Consts
 import { saladChoices } from "../../Constants/consts";
@@ -22,22 +23,26 @@ import OrderTaker from "../OrderTaker";
 
 const RenderSalads = ({ total, setTotal, setSaladsAddedToCart, saladsAddedToCart, cartTotal, setCartTotal }) => {
 
-
-
     const [ selectedSalad, setSelectedSalad ] = useState("")
     const [ checkOutModal, setCheckOutModal ]= useState(false)
-    const [ saladOptions, setSaladOptions ] = useState([{}])
+    const [ saladOptions, setSaladOptions ] = useState([])
     const [ checkedItems, setCheckedItems ] = useState([{}])
     const [ successMessage, setSuccessMessage ] = useState(false)
+    const grabSaladChoicesSessionStorage = JSON.parse(sessionStorage.getItem('salad Choices')) || []
+
+    console.log(grabSaladChoicesSessionStorage, 'yho')
    
-
-
     const navigatePage = useNavigate()
-
+    // console.log(saladOptions, 'length')
     const fetchSalads = async () => {
         try{
+
             const res = await axios.get('http://localhost:8800/SaladsChoices')
+            setTimeout(() => {
+            sessionStorage.setItem('salad Choices', JSON.stringify(res.data))
             setSaladOptions(res.data)
+
+            }, 1200)
         }
         catch(err){
             console.log(err)
@@ -48,7 +53,7 @@ const RenderSalads = ({ total, setTotal, setSaladsAddedToCart, saladsAddedToCart
         fetchSalads()
 
     },[])
-    
+  
     const placeOrder = (id) => {
         setSelectedSalad(saladOptions[id].Title)
         const userSelectedSalad = saladOptions[id].Title
@@ -84,15 +89,14 @@ const RenderSalads = ({ total, setTotal, setSaladsAddedToCart, saladsAddedToCart
              style={{ marginLeft: '16px' }} // Adds space between the Chip and Alert text
            />
          </Alert>
-         
             : null
-
             }
         <div style = {{display:'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr)', gap: '10px', margin: '40px'}}>
-            { saladOptions.length === 0 ?   <div>
-                <p>Loading Salads...</p>
+            { grabSaladChoicesSessionStorage.length === 0 ?  
+             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center' , height: '100vh'}}>
+                <CircularProgress size="10rem" sx={{padding: '20px'}} />
                 </div>:
-                  saladOptions.map((salad, id) => {
+                  grabSaladChoicesSessionStorage.map((salad, id) => {
                     return (
                         <Fragment key={id}>
                             <Card sx={{ width: 300, height: 400, backgroundColor: 'aliceblue' }}>

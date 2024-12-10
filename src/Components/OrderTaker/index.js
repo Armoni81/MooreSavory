@@ -91,7 +91,7 @@ OrderTaker = ({
     setSaladsAddedToCart(salads => {
         const updatedCart = [
           ...salads,
-          { selectedToppings: trimmedSaladIngredients, title: selectedSalad, price: total }
+          { selectedToppings: trimmedSaladIngredients, extraCheckedItems:extraCheckedItems, title: selectedSalad, price: total }
         ];
         const stringify = JSON.stringify(updatedCart)
 

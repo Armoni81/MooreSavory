@@ -2,7 +2,7 @@
 import * as React from 'react';
 //Material UI
 import Badge from '@mui/material/Badge';
-import MailIcon from '@mui/icons-material/Mail';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -26,7 +26,7 @@ const getSaladCart = JSON.parse(sessionStorage.getItem('cart')) || []
           <Box sx={{ display: { xs: 'flex', md: 'flex', lg: 'flex' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit" href='/cart'>
               <Badge badgeContent={getSaladCart.length} color="error" >
-                <MailIcon />
+                <ShoppingCartIcon />
               </Badge>
             </IconButton>
           </Box>
