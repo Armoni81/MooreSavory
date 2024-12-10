@@ -128,6 +128,7 @@ const OrderTaker = ({
                     variant="h6"
                     component="h2"
                   >
+                    <p>X</p>
                     {userSelectedSalad.Title}
                   </Typography>
                   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
@@ -138,7 +139,6 @@ const OrderTaker = ({
                   </Typography>
                   <FormGroup>
                     {seperateEachTopping.map((topping, id) => {
-                      console.log(checkedItems[topping], "checked");
                       return (
                         <FormControlLabel
                           key={id}

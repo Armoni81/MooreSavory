@@ -26,18 +26,14 @@ const Cart = ({
 
   console.log(grabSalads, "yoo");
   const removeSalad = (key) => {
-    console.log(key, "key");
     const items = JSON.parse(sessionStorage.getItem("cart"));
-    console.log(items, "b4 splice");
     items.splice(key, 1);
-    console.log(items, "after splice");
     sessionStorage.setItem("cart", JSON.stringify(items));
 
     if (items.length <= 0) {
       window.location.href = "/order";
     }
-    setSaladsAddedToCart(items);
-    // setTotal('0.00')
+    setSaladsAddedToCart(items); // rerender
   };
   const placeOrder = async () => {
     grabSalads[0]["name"] = "Armoni"; // change customer name here
@@ -46,7 +42,6 @@ const Cart = ({
     }
     try {
       await axios.post("http://localhost:8800/customerOrder", grabSalads);
-      console.log("hi");
       setTotal("0.00");
       navigatePage("/");
       sessionStorage.setItem("cart", JSON.stringify([]));
