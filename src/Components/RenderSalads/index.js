@@ -59,7 +59,6 @@ const RenderSalads = ({
   const placeOrder = (id) => {
     setSelectedSalad(saladOptions[id].Title);
     const userSelectedSalad = saladOptions[id].Title;
-    // console.log(userSelectedSalad, 'userselected')
     setCheckOutModal(true);
     setTotal(saladOptions[id].price);
     setCheckedItems((items) => {
