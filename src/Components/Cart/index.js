@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
@@ -18,13 +18,25 @@ const Cart = ({
   setSaladsAddedToCart,
   total,
   setTotal,
-  cartTotal,
-  setCartTotal,
 }) => {
+  const [cartTotal, setCartTotal] = useState(total);
   const grabSalads = JSON.parse(sessionStorage.getItem("cart"));
   const navigatePage = useNavigate();
 
-  console.log(grabSalads, "yoo");
+  useEffect(() => {
+    setCartTotal((total) => {
+      let counter = 0;
+
+      grabSalads.forEach((val) => {
+        let cachePrice = val.price + 0; 
+        if (val.price) {
+          counter += cachePrice;
+        }
+      });
+      return counter;
+    });
+  }, [saladsAddedToCart]);
+
   const removeSalad = (key) => {
     const items = JSON.parse(sessionStorage.getItem("cart"));
     items.splice(key, 1);
@@ -78,7 +90,6 @@ const Cart = ({
                 const trueValuesExtraToppings = Object.keys(
                   el.extraCheckedItems
                 ).filter((value) => el.extraCheckedItems[value]);
-                console.log(trueValuesExtraToppings, "need");
                 return (
                   <React.Fragment>
                     <Box key={key} sx={{ bgcolor: "white", padding: "20px" }}>
@@ -105,11 +116,12 @@ const Cart = ({
                   </React.Fragment>
                 );
               })}
-
-              <h1>Total:0 </h1>
+            <div style={{display:'flex', justifyContent: 'space-between', padding: '10px'}}>
+              <Typography>{`Total: $${cartTotal}.00`} </Typography>
               <Button variant="contained" onClick={() => placeOrder()}>
                 Place Order
               </Button>
+            </div>
             </div>
           )}
         </Box>

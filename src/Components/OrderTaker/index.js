@@ -52,8 +52,8 @@ const OrderTaker = ({
     });
     setTotal((total) => {
       if (event.target.checked) {
-        const toNumber = Number(total) + 2;
-        return String(toNumber); //bug here  add .00
+        const toNumber = total + 2;
+        return toNumber; //bug here  add .00 🚨🐛
       }
       return total - 2; //bug here  add .00
     });
@@ -189,7 +189,7 @@ const OrderTaker = ({
                       })}
                     </Box>
 
-                    <Typography>{`Total:${total}`}</Typography>
+                    <Typography>{`Total: $${total}`}</Typography>
                   </FormGroup>
                   <Button
                     variant="contained"

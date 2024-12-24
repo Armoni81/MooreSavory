@@ -48,7 +48,8 @@ app.post("/customerOrder", (req, res) => {
     const values = req.body.map((order) => {
         const toppings = Object.keys(order.selectedToppings).join(",");
         order['date'] = new Date()
-        return [order.title, toppings, Number(order.price), order.name, order.date];
+        console.log(order.price, 'loaded')
+        return [order.title, toppings, order.price, order.name, order.date];
     });
 
     // Execute a single query for all orders

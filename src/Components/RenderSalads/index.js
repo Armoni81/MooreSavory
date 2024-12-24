@@ -133,7 +133,7 @@ const RenderSalads = ({
                   <CardActions
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
-                    <Typography>{salad.price}</Typography>
+                    <Typography>{`$${salad.price}`}</Typography>
                     <Button
                       variant="contained"
                       onClick={() => placeOrder(id)}
