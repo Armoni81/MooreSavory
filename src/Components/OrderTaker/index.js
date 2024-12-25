@@ -66,7 +66,9 @@ const OrderTaker = ({
     const currentCheckedItems = checkedItems;
     setSaladsAddedToCart(sessionStorageItems);
     setExtraCheckedItems([]);
-    const trimmedSaladIngredients = Object.keys(currentCheckedItems).reduce(
+    const grabSaladImg = saladOptions.filter(salad => salad.Title === selectedSalad)[0].img
+
+    const trimmedSaladIngredients = Object.keys(currentCheckedItems).reduce( 
       (acc, key) => {
         // Trim the key and add it to the new object
         acc[key.trim()] = currentCheckedItems[key];
@@ -84,6 +86,7 @@ const OrderTaker = ({
           extraCheckedItems: extraCheckedItems,
           title: selectedSalad,
           price: total,
+          img: grabSaladImg
         },
       ];
       const stringify = JSON.stringify(updatedCart);
