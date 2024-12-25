@@ -90,17 +90,19 @@ const Cart = ({
                 const trueValuesExtraToppings = Object.keys(
                   el.extraCheckedItems
                 ).filter((value) => el.extraCheckedItems[value]);
+                console.log(trueValuesExtraToppings.length, 'lemn')
                 return (
                   <React.Fragment>
-                    <Box key={key} sx={{ bgcolor: "white", padding: "20px" }}>
-                      <Typography> {`Price: ${el.price}`}</Typography>
-                      <Typography>{`Title: ${el.title}`}</Typography>
-                      <Typography>{`Toppings: ${trueValuesBaseToppings.join(
+                    <Box key={key} sx={{ bgcolor: "white", padding: "8px" }}>
+                      <Typography style={{backgroundColor: '#cfe8fc', padding: "6px", borderRadius: '5px'}}> {`Price: $${el.price}`}</Typography>
+                      <Typography style={{padding: "6px"}}>{`Salad: ${el.title}`}</Typography>
+                      <Typography style={{backgroundColor: '#cfe8fc', padding: "6px", borderRadius: '5px'}}>{ trueValuesBaseToppings.length ? `Toppings: ${trueValuesBaseToppings.join(
                         " | "
-                      )}`}</Typography>
-                      <Typography>{`Extra Toppings: ${trueValuesExtraToppings.join(
+                      )}`: 'Toppings: None selected'}</Typography>
+                      <Typography style={{padding: "6px"}}>{trueValuesExtraToppings.length ? `Extra Toppings: ${trueValuesExtraToppings.join(
                         " | "
-                      )}`}</Typography>
+                      )}`: 'Extra Toppings: None selected'}</Typography>
+                      <img src={el.img}></img>
                       <IconButton>
                         <Badge>
                           <EditIcon />
