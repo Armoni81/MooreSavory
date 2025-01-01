@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/Armoni81/MooreSavory/static/css/main.1600b182.css",
-    "main.js": "/Armoni81/MooreSavory/static/js/main.28bf3625.js",
+    "main.js": "/Armoni81/MooreSavory/static/js/main.01a9af69.js",
     "static/js/453.0db35ccf.chunk.js": "/Armoni81/MooreSavory/static/js/453.0db35ccf.chunk.js",
     "static/media/Salad.jpg": "/Armoni81/MooreSavory/static/media/Salad.5134e66b22887d1dcc27.jpg",
     "static/media/00.jpeg": "/Armoni81/MooreSavory/static/media/00.152cac0b16c70cc9e5c3.jpeg",
     "index.html": "/Armoni81/MooreSavory/index.html",
     "main.1600b182.css.map": "/Armoni81/MooreSavory/static/css/main.1600b182.css.map",
-    "main.28bf3625.js.map": "/Armoni81/MooreSavory/static/js/main.28bf3625.js.map",
+    "main.01a9af69.js.map": "/Armoni81/MooreSavory/static/js/main.01a9af69.js.map",
     "453.0db35ccf.chunk.js.map": "/Armoni81/MooreSavory/static/js/453.0db35ccf.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1600b182.css",
-    "static/js/main.28bf3625.js"
+    "static/js/main.01a9af69.js"
   ]
 }
