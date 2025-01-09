@@ -1,5 +1,5 @@
 import './App.css';
-import { HashRouter, Routes, Route} from 'react-router-dom'
+import { HashRouter, Routes, Route, BrowserRouter} from 'react-router-dom'
 import { useState, useRef } from 'react';
 //Imported Components
 import LandingPage from './Components/LandingPage/landingPage';
@@ -16,16 +16,16 @@ const App = () => {
 
   const cartLength = saladsAddedToCart.length
   return (
-   <HashRouter basename='/MooreSavory'> 
-     <PrimarySearchAppBar cartLength={cartLength}/>
-     <Routes>
+    <BrowserRouter> 
+    <PrimarySearchAppBar cartLength={cartLength}/>
+    <Routes>
       <Route path='/' element={<LandingPage/>}/>
       <Route path='/order' element={<RenderSalads total={total} setTotal= {setTotal} saladsAddedToCart={saladsAddedToCart} setSaladsAddedToCart={setSaladsAddedToCart}/>} />
       <Route path='/Salads' element={<Salad/>} />
       <Route path='/add' element={<AddSalad/>}/>
       <Route path='/cart' element={<Cart saladsAddedToCart={saladsAddedToCart} setSaladsAddedToCart={setSaladsAddedToCart} total={total} setTotal={setTotal}/>}/>
-     </Routes>
-   </HashRouter>
+    </Routes>
+  </BrowserRouter>
   );
 }
 
