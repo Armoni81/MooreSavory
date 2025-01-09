@@ -20,7 +20,7 @@ const Cart = ({
   setTotal,
 }) => {
   const [cartTotal, setCartTotal] = useState(total);
-  const grabSalads = JSON.parse(sessionStorage.getItem("cart"));
+  const grabSalads = JSON.parse(sessionStorage.getItem("cart")) || []; 
   const navigatePage = useNavigate();
 
   useEffect(() => {
