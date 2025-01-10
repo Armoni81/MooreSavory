@@ -102,7 +102,7 @@ const Cart = ({
                       <Typography style={{padding: "6px"}}>{trueValuesExtraToppings.length ? `Extra Toppings: ${trueValuesExtraToppings.join(
                         " | "
                       )}`: 'Extra Toppings: None selected'}</Typography>
-                      <img src={el.img}></img>
+                      <img src={el.img}  style={{width: '100%'}}></img>
                       <IconButton>
                         <Badge>
                           <EditIcon />
