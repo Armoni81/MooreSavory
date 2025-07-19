@@ -11,6 +11,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Divider from "@mui/material/Divider";
 import EditIcon from "@mui/icons-material/Edit";
 import axios from "axios";
+import Checkbox from '@mui/material/Checkbox';
 import { useNavigate } from "react-router-dom";
 
 const Cart = ({
@@ -102,7 +103,7 @@ const Cart = ({
                       <Typography style={{padding: "6px"}}>{trueValuesExtraToppings.length ? `Extra Toppings: ${trueValuesExtraToppings.join(
                         " | "
                       )}`: 'Extra Toppings: None selected'}</Typography>
-                      <img src={el.img}  style={{width: '100%'}}></img>
+                      <img src={el.img}  style={{width: '50%'}}></img>
                       <IconButton>
                         <Badge>
                           <EditIcon />
